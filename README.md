@@ -1,27 +1,31 @@
-# PortafolioWeb
+# Johan Hernández — Portafolio
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.6.
+Portafolio personal como **AI Solutions Architect**. Sitio estático bilingüe (ES/EN) hecho con [Astro](https://astro.build).
 
-## Development server
+## Desarrollo
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```bash
+npm install
+npm run dev       # http://localhost:4321
+npm run build     # genera dist/
+npm run preview   # sirve dist/
+```
 
-## Code scaffolding
+## Dónde editar
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+| Qué | Archivo |
+|---|---|
+| Textos ES/EN, proyectos, experiencia, stack, contacto | `src/data/site.ts` |
+| Estructura de la página | `src/components/Home.astro` |
+| SEO (title, Open Graph, hreflang, JSON-LD) | `src/layouts/Base.astro` |
+| Estilos | `src/styles/global.css` |
+| Imagen para compartir en redes | `public/og.png` (1200×630) |
 
-## Build
+Para **agregar un proyecto**, añade un objeto al arreglo `projects` en `src/data/site.ts`. Con `featured: true` aparece en grande.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Despliegue (Vercel)
 
-## Running unit tests
+1. Importa el repo en Vercel; detecta Astro solo (build `npm run build`, salida `dist`).
+2. Cuando tengas dominio propio, cámbialo en `site` de `astro.config.mjs` y en `public/robots.txt`.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+La versión anterior (Angular 13) sigue en la rama `main` del historial.

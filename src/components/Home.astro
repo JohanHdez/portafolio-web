@@ -1,0 +1,164 @@
+---
+import { profile, ui, projects, clientWork, experience, stack, type Lang } from '../data/site';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang];
+const otherHref = lang === 'es' ? '/en/' : '/';
+const featured = projects.filter((p) => p.featured);
+const more = projects.filter((p) => !p.featured);
+---
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href={lang === 'es' ? '/' : '/en/'} class="logo" aria-label={profile.name}>JH<span>.</span></a>
+    <nav aria-label="Main">
+      <a href="#services">{t.nav.services}</a>
+      <a href="#projects">{t.nav.projects}</a>
+      <a href="#experience">{t.nav.experience}</a>
+      <a href="#contact">{t.nav.contact}</a>
+      <a href={otherHref} class="lang" hreflang={lang === 'es' ? 'en' : 'es'}>{t.langSwitch}</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <p class="eyebrow mono">{t.hero.eyebrow}</p>
+    <h1>{t.hero.title}</h1>
+    <p class="lead">{t.hero.lead}</p>
+    <div class="actions">
+      <a class="btn primary" href="#projects">{t.hero.ctaPrimary}</a>
+      <a class="btn" href="#contact">{t.hero.ctaSecondary}</a>
+    </div>
+    <dl class="stats">
+      {t.hero.stats.map((s) => (
+        <div>
+          <dt>{s.value}</dt>
+          <dd>{s.label}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  <section id="services" class="wrap section">
+    <h2>{t.services.title}</h2>
+    <div class="grid-4">
+      {t.services.items.map((s, i) => (
+        <article class="card service">
+          <span class="mono idx">0{i + 1}</span>
+          <h3>{s.title}</h3>
+          <p>{s.text}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section id="projects" class="wrap section">
+    <h2>{t.projects.title}</h2>
+    <p class="sub">{t.projects.subtitle}</p>
+
+    <div class="featured">
+      {featured.map((p) => (
+        <article class={`card project big${p.image ? ' has-img' : ''}`} style={`--accent:${p.accent}`}>
+          {p.image ? (
+            <a class="visual shot" href={p.image} target="_blank" rel="noopener">
+              <img src={p.image} alt={p.imageAlt?.[lang] ?? p.name} loading="lazy" width="1440" height="1000" />
+            </a>
+          ) : (
+            <div class="visual" aria-hidden="true"><span>{p.glyph}</span></div>
+          )}
+          <div class="body">
+            {p.badge && <span class="badge mono">● {p.badge[lang]}</span>}
+            <h3>{p.name}</h3>
+            <p class="tagline">{p.tagline[lang]}</p>
+            <p>{p.description[lang]}</p>
+            <ul class="hl">
+              {p.highlights[lang].map((h) => <li>{h}</li>)}
+            </ul>
+            <ul class="tags mono">{p.tags.map((tag) => <li>{tag}</li>)}</ul>
+            <div class="links">
+              {p.store && <a class="btn primary sm" href={p.store} target="_blank" rel="noopener">{t.projects.store} ↗</a>}
+              {p.demo && <a class="btn primary sm" href={p.demo} target="_blank" rel="noopener">{t.projects.demo} ↗</a>}
+              {p.apk && <a class="btn primary sm" href={p.apk} target="_blank" rel="noopener">{t.projects.apk} ↓</a>}
+              {p.repo && <a class="btn sm" href={p.repo} target="_blank" rel="noopener">{t.projects.code} ↗</a>}
+              {p.privateCode && <span class="note mono">🔒 {t.projects.privateCode}</span>}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="grid-2 more">
+      {more.map((p) => (
+        <article class="card project" style={`--accent:${p.accent}`}>
+          <div class="visual sm-visual" aria-hidden="true"><span>{p.glyph}</span></div>
+          <h3>{p.name}</h3>
+          <p class="tagline">{p.tagline[lang]}</p>
+          <p>{p.description[lang]}</p>
+          <ul class="tags mono">{p.tags.map((tag) => <li>{tag}</li>)}</ul>
+          <div class="links">
+            {p.demo && <a class="btn primary sm" href={p.demo} target="_blank" rel="noopener">{t.projects.demo} ↗</a>}
+            {p.apk && <a class="btn primary sm" href={p.apk} target="_blank" rel="noopener">{t.projects.apk} ↓</a>}
+            {p.repo && <a class="btn sm" href={p.repo} target="_blank" rel="noopener">{t.projects.code} ↗</a>}
+            {p.privateCode && <span class="note mono">🔒 {t.projects.privateCode}</span>}
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <h2 class="mt">{t.projects.clientTitle}</h2>
+    <p class="sub">{t.projects.clientSubtitle}</p>
+    <div class="grid-2">
+      {clientWork.map((c) => (
+        <article class="card client">
+          <h3>{c.title[lang]}</h3>
+          <p>{c.text[lang]}</p>
+          <ul class="tags mono">{c.tags.map((tag) => <li>{tag}</li>)}</ul>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section id="experience" class="wrap section two-col">
+    <div>
+      <h2>{t.experience.title}</h2>
+      <ol class="timeline">
+        {experience.map((e) => (
+          <li>
+            {'period' in e && e.period && <span class="period mono">{e.period[lang]}</span>}
+            <h3>{e.role[lang]}{e.org && <span class="org"> · {e.org}</span>}</h3>
+            <p>{e.text[lang]}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+    <div>
+      <h2>{t.stack.title}</h2>
+      <div class="stack">
+        {stack.map((g) => (
+          <div>
+            <h3 class="mono">{g.group}</h3>
+            <ul class="tags mono">{g.items.map((i) => <li>{i}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="wrap section contact">
+    <h2>{t.contact.title}</h2>
+    <p class="lead">{t.contact.text}</p>
+    <div class="actions">
+      <a class="btn primary" href={`mailto:${profile.email}`}>{t.contact.email} → {profile.email}</a>
+      <a class="btn" href={profile.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="btn" href={profile.github} target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap footer mono">
+  <span>© {new Date().getFullYear()} {profile.name} · {profile.location}</span>
+  <span>{t.footer}</span>
+</footer>
