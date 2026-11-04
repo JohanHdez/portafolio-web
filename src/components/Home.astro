@@ -90,7 +90,7 @@ const more = projects.filter((p) => !p.featured);
       ))}
     </div>
 
-    <div class="grid-2 more">
+    <div class="grid-3 more">
       {more.map((p) => (
         <article class="card project" style={`--accent:${p.accent}`}>
           {p.image ? (
@@ -109,6 +109,7 @@ const more = projects.filter((p) => !p.featured);
             {p.apk && <a class="btn primary sm" href={p.apk} target="_blank" rel="noopener">{t.projects.apk} ↓</a>}
             {p.repo && <a class="btn sm" href={p.repo} target="_blank" rel="noopener">{t.projects.code} ↗</a>}
             {p.privateCode && <span class="note mono">🔒 {t.projects.privateCode}</span>}
+            {p.codeOnRequest && <a class="btn sm" href={`mailto:${profile.email}?subject=${encodeURIComponent(`${t.projects.requestSubject} ${p.name}`)}`}>🔒 {t.projects.requestCode}</a>}
           </div>
         </article>
       ))}

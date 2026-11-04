@@ -57,6 +57,8 @@ export const ui = {
       store: 'Chrome Web Store',
       apk: 'Descargar APK (Android)',
       privateCode: 'Código privado del cliente',
+      requestCode: 'Solicitar acceso al código',
+      requestSubject: 'Solicitud de acceso al código de',
     },
     experience: {
       title: 'Experiencia',
@@ -118,6 +120,8 @@ export const ui = {
       store: 'Chrome Web Store',
       apk: 'Download APK (Android)',
       privateCode: 'Private client code',
+      requestCode: 'Request code access',
+      requestSubject: 'Code access request for',
     },
     experience: {
       title: 'Experience',
@@ -148,6 +152,7 @@ export interface Project {
   apk?: string; // enlace de descarga del APK (p. ej. GitHub Releases)
   badge?: T; // etiqueta destacada, p. ej. "En producción"
   privateCode?: boolean; // código de cliente, no público
+  codeOnRequest?: boolean; // repo privado: acceso bajo solicitud por correo
   image?: string; // captura en /public/projects
   imageAlt?: T;
   accent: string; // color del bloque visual
@@ -284,6 +289,7 @@ export const projects: Project[] = [
   {
     slug: 'vinyl-player',
     name: 'Vinyl Player',
+    featured: true,
     accent: '#ff6b6b',
     glyph: '◍',
     tagline: {
@@ -295,14 +301,27 @@ export const projects: Project[] = [
       en: 'YouTube music player with an animated turntable and "Jam Sessions": guests join with a QR code and share the same playlist.',
     },
     highlights: {
-      es: ['Playlist sincronizada con Socket.IO y reconexión automática', 'Docker listo para desplegar'],
-      en: ['Playlist synced with Socket.IO and automatic reconnection', 'Docker-ready'],
+      es: [
+        'Tocadiscos animado: el vinilo gira con la portada de la canción y el brazo baja al reproducir',
+        'Jam Sessions: el anfitrión comparte un QR y los invitados se unen a una playlist sincronizada con Socket.IO',
+        'Cada invitado elige escuchar en su dispositivo o en el del anfitrión; reconexión automática de 5 min',
+        'Busca en YouTube o pega una URL, sin API key, y se despliega con Docker',
+      ],
+      en: [
+        'Animated turntable: the record spins with the song cover and the tonearm drops on play',
+        'Jam Sessions: the host shares a QR code and guests join a playlist synced with Socket.IO',
+        'Each guest listens on their own device or the host’s; 5-minute automatic reconnection',
+        'Search YouTube or paste a URL with no API key; ships with Docker',
+      ],
     },
-    tags: ['Angular 21', 'Express 5', 'Socket.IO', 'Docker'],
+    tags: ['Angular 21', 'TypeScript', 'Express 5', 'Socket.IO', 'Real-time', 'Docker'],
     repo: 'https://github.com/JohanHdez/vinyl-player',
+    image: '/projects/vinyl-player.webp',
+    imageAlt: { es: 'Vinyl Player: tocadiscos reproduciendo y cola de reproducción', en: 'Vinyl Player: turntable playing and play queue' },
   },
   {
     slug: 'fallen-legends-3d',
+    codeOnRequest: true,
     name: 'Fallen Legends 3D',
     accent: '#5aa9ff',
     glyph: '◆',
@@ -325,6 +344,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'fallen-legends',
+    codeOnRequest: true,
     name: 'Fallen Legends',
     accent: '#a78bfa',
     glyph: '◇',
@@ -362,7 +382,7 @@ export const projects: Project[] = [
       es: ['HTML, CSS y JS sin frameworks', 'Totalmente responsive'],
       en: ['Vanilla HTML, CSS and JS', 'Fully responsive'],
     },
-    tags: ['HTML', 'CSS', 'JavaScript', 'Cliente'],
+    tags: ['HTML', 'CSS', 'JavaScript', 'Client work'],
     image: '/projects/nails.webp',
     imageAlt: { es: 'Portada del sitio de Alejandra Ochoa Nails', en: 'Alejandra Ochoa Nails website hero' },
     repo: 'https://github.com/JohanHdez/nails',
