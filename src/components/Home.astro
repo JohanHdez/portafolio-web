@@ -1,171 +1,255 @@
 ---
-import { profile, ui, projects, clientWork, experience, stack, type Lang } from '../data/site';
+import {
+  profile, ui, agents, cases, smallProjects, clientWork, experience, education, stack, type Lang,
+} from '../data/site';
 
 interface Props {
   lang: Lang;
 }
 const { lang } = Astro.props;
 const t = ui[lang];
+const home = lang === 'es' ? '/' : '/en/';
 const otherHref = lang === 'es' ? '/en/' : '/';
-const featured = projects.filter((p) => p.featured);
-const more = projects.filter((p) => !p.featured);
+const linkText = { visit: t.work.visit, code: t.work.code, store: t.work.store };
+const mail = (subject: string) => `mailto:${profile.email}?subject=${encodeURIComponent(subject)}`;
 ---
 <header class="nav">
   <div class="wrap nav-in">
-    <a href={lang === 'es' ? '/' : '/en/'} class="logo" aria-label={profile.name}>JH<span>.</span></a>
+    <a href={home} class="mark" aria-label={profile.name}>Johan<span>.</span></a>
     <nav aria-label="Main">
-      <a href="#services">{t.nav.services}</a>
-      <a href="#projects">{t.nav.projects}</a>
+      <a href="#work">{t.nav.work}</a>
+      <a href="#how">{t.nav.how}</a>
       <a href="#experience">{t.nav.experience}</a>
       <a href="#contact">{t.nav.contact}</a>
-      <a href={otherHref} class="lang" hreflang={lang === 'es' ? 'en' : 'es'}>{t.langSwitch}</a>
+      <a href={otherHref} class="pill" hreflang={lang === 'es' ? 'en' : 'es'}>{t.langSwitch}</a>
     </nav>
   </div>
 </header>
 
 <main>
+  <!-- HERO -->
   <section class="hero wrap">
-    <p class="eyebrow mono">{t.hero.eyebrow}</p>
-    <h1>{t.hero.title}</h1>
-    <p class="lead">{t.hero.lead}</p>
-    <div class="actions">
-      <a class="btn primary" href="#projects">{t.hero.ctaPrimary}</a>
-      <a class="btn" href="#contact">{t.hero.ctaSecondary}</a>
+    <div class="hero-text">
+      <p class="meta mono">
+        <span class="dot" aria-hidden="true"></span>
+        {profile.location} · <time id="clock" data-suffix={t.localTime}>—</time> · {t.hero.status}
+      </p>
+      <p class="hello">{t.hero.hello} <strong>{profile.name}</strong>.</p>
+      <h1>
+        <span>{t.hero.line1}</span>
+        <span>{t.hero.line2}</span>
+        <span><em class="mark-hl">{t.hero.line3}</em></span>
+      </h1>
+      <p class="lead">{t.hero.lead}</p>
+      <div class="actions">
+        <a class="btn ink" href="#work">{t.hero.ctaWork} ↓</a>
+        <a class="btn" href={profile.cv} download>{t.hero.ctaCv}</a>
+      </div>
     </div>
-    <dl class="stats">
-      {t.hero.stats.map((s) => (
-        <div>
-          <dt>{s.value}</dt>
-          <dd>{s.label}</dd>
+
+    <aside class="now" aria-label={t.hero.nowLabel}>
+      <p class="now-label mono">● {t.hero.nowLabel}</p>
+      <h2>{t.hero.nowTitle}</h2>
+      <p>{t.hero.nowText}</p>
+      <a href={profile.kmaleon} target="_blank" rel="noopener" class="now-link">{t.hero.nowLink} ↗</a>
+      <img src="/projects/kmaleon-mobile.webp" alt="" width="390" height="844" class="now-phone" />
+    </aside>
+  </section>
+
+  <section class="numbers wrap" aria-label="Datos">
+    {t.numbers.map((n) => (
+      <div>
+        <strong>{n.value}</strong>
+        <span>{n.label}</span>
+      </div>
+    ))}
+  </section>
+
+  <!-- CÓMO TRABAJO -->
+  <section id="how" class="how">
+    <div class="wrap">
+      <p class="kicker mono">{t.how.kicker}</p>
+      <h2 class="section-title">{t.how.title}</h2>
+      <p class="section-lead">{t.how.text}</p>
+
+      <div class="team" aria-hidden="true">
+        <div class="human">
+          <span class="avatar">JH</span>
+          <div><strong>{t.how.me}</strong><small>{t.how.meRole}</small></div>
         </div>
-      ))}
-    </dl>
-  </section>
+        <div class="wire"></div>
+        <ul class="agents">
+          {agents.map((a, i) => <li class="mono"><span>{String(i + 1).padStart(2, '0')}</span>{a[lang]}</li>)}
+        </ul>
+      </div>
 
-  <section id="services" class="wrap section">
-    <h2>{t.services.title}</h2>
-    <div class="grid-4">
-      {t.services.items.map((s, i) => (
-        <article class="card service">
-          <span class="mono idx">0{i + 1}</span>
-          <h3>{s.title}</h3>
-          <p>{s.text}</p>
-        </article>
-      ))}
-    </div>
-  </section>
-
-  <section id="projects" class="wrap section">
-    <h2>{t.projects.title}</h2>
-    <p class="sub">{t.projects.subtitle}</p>
-
-    <div class="featured">
-      {featured.map((p) => (
-        <article class={`card project big${p.image ? ' has-img' : ''}`} style={`--accent:${p.accent}`}>
-          {p.image ? (
-            <a class="visual shot" href={p.image} target="_blank" rel="noopener">
-              <img src={p.image} alt={p.imageAlt?.[lang] ?? p.name} loading="lazy" width="1440" height="1000" />
-            </a>
-          ) : (
-            <div class="visual" aria-hidden="true"><span>{p.glyph}</span></div>
-          )}
-          <div class="body">
-            {p.badge && <span class="badge mono">● {p.badge[lang]}</span>}
-            <h3>{p.name}</h3>
-            <p class="tagline">{p.tagline[lang]}</p>
-            <p>{p.description[lang]}</p>
-            <ul class="hl">
-              {p.highlights[lang].map((h) => <li>{h}</li>)}
-            </ul>
-            <ul class="tags mono">{p.tags.map((tag) => <li>{tag}</li>)}</ul>
-            <div class="links">
-              {p.store && <a class="btn primary sm" href={p.store} target="_blank" rel="noopener">{t.projects.store} ↗</a>}
-              {p.demo && <a class="btn primary sm" href={p.demo} target="_blank" rel="noopener">{t.projects.demo} ↗</a>}
-              {p.apk && <a class="btn primary sm" href={p.apk} target="_blank" rel="noopener">{t.projects.apk} ↓</a>}
-              {p.repo && <a class="btn sm" href={p.repo} target="_blank" rel="noopener">{t.projects.code} ↗</a>}
-              {p.privateCode && <span class="note mono">🔒 {t.projects.privateCode}</span>}
-            </div>
-          </div>
-        </article>
-      ))}
-    </div>
-
-    <div class="grid-3 more">
-      {more.map((p) => (
-        <article class="card project" style={`--accent:${p.accent}`}>
-          {p.image ? (
-            <a class="visual sm-visual shot" href={p.image} target="_blank" rel="noopener">
-              <img src={p.image} alt={p.imageAlt?.[lang] ?? p.name} loading="lazy" width="1280" height="720" />
-            </a>
-          ) : (
-            <div class="visual sm-visual" aria-hidden="true"><span>{p.glyph}</span></div>
-          )}
-          <h3>{p.name}</h3>
-          <p class="tagline">{p.tagline[lang]}</p>
-          <p>{p.description[lang]}</p>
-          <ul class="tags mono">{p.tags.map((tag) => <li>{tag}</li>)}</ul>
-          <div class="links">
-            {p.demo && <a class="btn primary sm" href={p.demo} target="_blank" rel="noopener">{t.projects.demo} ↗</a>}
-            {p.apk && <a class="btn primary sm" href={p.apk} target="_blank" rel="noopener">{t.projects.apk} ↓</a>}
-            {p.repo && <a class="btn sm" href={p.repo} target="_blank" rel="noopener">{t.projects.code} ↗</a>}
-            {p.privateCode && <span class="note mono">🔒 {t.projects.privateCode}</span>}
-            {p.codeOnRequest && <a class="btn sm" href={`mailto:${profile.email}?subject=${encodeURIComponent(`${t.projects.requestSubject} ${p.name}`)}`}>🔒 {t.projects.requestCode}</a>}
-          </div>
-        </article>
-      ))}
-    </div>
-
-    <h2 class="mt">{t.projects.clientTitle}</h2>
-    <p class="sub">{t.projects.clientSubtitle}</p>
-    <div class="grid-2">
-      {clientWork.map((c) => (
-        <article class="card client">
-          <h3>{c.title[lang]}</h3>
-          <p>{c.text[lang]}</p>
-          <ul class="tags mono">{c.tags.map((tag) => <li>{tag}</li>)}</ul>
-        </article>
-      ))}
-    </div>
-  </section>
-
-  <section id="experience" class="wrap section two-col">
-    <div>
-      <h2>{t.experience.title}</h2>
-      <ol class="timeline">
-        {experience.map((e) => (
+      <ol class="steps">
+        {t.how.steps.map((s) => (
           <li>
-            {'period' in e && e.period && <span class="period mono">{e.period[lang]}</span>}
-            <h3>{e.role[lang]}{e.org && <span class="org"> · {e.org}</span>}</h3>
-            <p>{e.text[lang]}</p>
+            <span class="mono">{s.n}</span>
+            <h3>{s.t}</h3>
+            <p>{s.d}</p>
           </li>
         ))}
       </ol>
+      <p class="footnote">{t.how.footnote}</p>
     </div>
-    <div>
-      <h2>{t.stack.title}</h2>
+  </section>
+
+  <!-- CASOS -->
+  <section id="work" class="wrap section">
+    <p class="kicker mono">{t.work.kicker}</p>
+    <h2 class="section-title">{t.work.title}</h2>
+
+    {cases.map((c, i) => (
+      <article class={`case${i % 2 ? ' flip' : ''}`} style={`--accent:${c.accent}`} id={c.slug}>
+        <div class="case-media">
+          {c.shots.map((s) =>
+            s.kind === 'phone' ? (
+              <figure class="phone"><img src={s.src} alt={s.alt[lang]} loading="lazy" width="390" height="844" /></figure>
+            ) : s.kind === 'panel' ? (
+              <figure class="panel"><img src={s.src} alt={s.alt[lang]} loading="lazy" width="420" height="860" /></figure>
+            ) : (
+              <figure class="browser">
+                <div class="bar"><i></i><i></i><i></i><span class="mono">{s.url}</span></div>
+                <img src={s.src} alt={s.alt[lang]} loading="lazy" width="1440" height="900" />
+              </figure>
+            )
+          )}
+        </div>
+
+        <div class="case-body">
+          <p class="case-head mono">
+            <span class="num">{String(i + 1).padStart(2, '0')}</span>
+            <span>{c.name}</span>
+            <span class="year">{c.year}</span>
+          </p>
+          {c.badge && <p class="badge mono">{c.badge[lang]}</p>}
+          <h3>{c.title[lang]}</h3>
+          <p class="summary">{c.summary[lang]}</p>
+
+          <p class="label mono">{t.work.role}: <span>{c.role[lang]}</span></p>
+          <ul class="built">{c.built[lang].map((b) => <li>{b}</li>)}</ul>
+
+          {c.metrics.length > 0 && (
+            <dl class="metrics">
+              {c.metrics.map((m) => (
+                <div><dt>{m.value}</dt><dd>{m.label[lang]}</dd></div>
+              ))}
+            </dl>
+          )}
+
+          <ul class="chips mono">{c.stack.map((s) => <li>{s}</li>)}</ul>
+
+          <div class="links">
+            {c.links.map((l) => (
+              <a class={`btn sm${l.label !== 'code' ? ' accent' : ''}`} href={l.href} target="_blank" rel="noopener">{linkText[l.label]} ↗</a>
+            ))}
+            {c.privateCode && <span class="note mono">🔒 {t.work.privateCode}</span>}
+          </div>
+        </div>
+      </article>
+    ))}
+  </section>
+
+  <!-- TAMBIÉN CONSTRUÍ -->
+  <section class="wrap section">
+    <h2 class="section-title small">{t.more.title}</h2>
+    <div class="small-grid">
+      {smallProjects.map((p) => (
+        <article class="small">
+          <a href={p.image} target="_blank" rel="noopener" class="small-img">
+            <img src={p.image} alt={p.imageAlt[lang]} loading="lazy" width="1280" height="720" />
+          </a>
+          <h3>{p.name}</h3>
+          <p>{p.text[lang]}</p>
+          <ul class="chips mono">{p.tags.map((tag) => <li>{tag}</li>)}</ul>
+          <div class="links">
+            {p.apk && <a class="btn sm accent" href={p.apk} target="_blank" rel="noopener">{t.more.apk} ↓</a>}
+            {p.codeOnRequest && <a class="btn sm" href={mail(`${t.more.requestSubject} ${p.name}`)}>🔒 {t.more.requestCode}</a>}
+            {p.repo && <a class="btn sm" href={p.repo} target="_blank" rel="noopener">{t.more.code} ↗</a>}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- CLIENTES -->
+  <section class="wrap section">
+    <p class="kicker mono">{t.clients.kicker}</p>
+    <h2 class="section-title">{t.clients.title}</h2>
+    <div class="clients">
+      {clientWork.map((c) => (
+        <article>
+          <p class="mono client-name">{c.name}</p>
+          <h3>{c.title[lang]}</h3>
+          <p>{c.text[lang]}</p>
+          <p class="result">{c.result[lang]}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- TRAYECTORIA -->
+  <section id="experience" class="wrap section">
+    <p class="kicker mono">{t.experience.kicker}</p>
+    <h2 class="section-title">{t.experience.title}</h2>
+    <ol class="timeline">
+      {experience.map((e) => (
+        <li>
+          <span class="when mono">{e.period[lang]}</span>
+          <div>
+            <h3>{e.role[lang]} <span class="org">— {e.org[lang]}</span></h3>
+            <p>{e.text[lang]}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    <div class="bottom-grid">
+      <div>
+        <h3 class="mono sub">{t.experience.education}</h3>
+        <ul class="plain">{education.map((e) => <li>{e[lang]}</li>)}</ul>
+      </div>
       <div class="stack">
         {stack.map((g) => (
           <div>
-            <h3 class="mono">{g.group}</h3>
-            <ul class="tags mono">{g.items.map((i) => <li>{i}</li>)}</ul>
+            <h3 class="mono sub">{g.group[lang]}</h3>
+            <ul class="chips mono">{g.items.map((i) => <li>{i}</li>)}</ul>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <section id="contact" class="wrap section contact">
-    <h2>{t.contact.title}</h2>
-    <p class="lead">{t.contact.text}</p>
-    <div class="actions">
-      <a class="btn primary" href={`mailto:${profile.email}`}>{t.contact.email} → {profile.email}</a>
-      <a class="btn" href={profile.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
-      <a class="btn" href={profile.github} target="_blank" rel="noopener">GitHub ↗</a>
+  <!-- CONTACTO -->
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <p class="kicker mono">{t.contact.kicker}</p>
+      <h2>{t.contact.title}</h2>
+      <p class="lead">{t.contact.text}</p>
+      <a class="big-mail" href={`mailto:${profile.email}`}>{profile.email}</a>
+      <div class="actions">
+        <a class="btn light" href={profile.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn light" href={profile.github} target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="btn light" href={profile.cv} download>{t.hero.ctaCv} ↓</a>
+      </div>
     </div>
   </section>
 </main>
 
 <footer class="wrap footer mono">
-  <span>© {new Date().getFullYear()} {profile.name} · {profile.location}</span>
+  <span>© {new Date().getFullYear()} {profile.name}</span>
   <span>{t.footer}</span>
 </footer>
+
+<script>
+  const el = document.getElementById('clock');
+  if (el) {
+    const lang = document.documentElement.lang === 'en' ? 'en-US' : 'es-CO';
+    const fmt = new Intl.DateTimeFormat(lang, { hour: '2-digit', minute: '2-digit', timeZone: 'America/Bogota' });
+    const tick = () => { el.textContent = `${fmt.format(new Date())} ${el.dataset.suffix ?? ''}`; };
+    tick();
+    setInterval(tick, 30000);
+  }
+</script>

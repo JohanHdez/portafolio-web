@@ -1,388 +1,436 @@
 export type Lang = 'es' | 'en';
+type T = { es: string; en: string };
+type TL = { es: string[]; en: string[] };
 
 export const profile = {
   name: 'Johan Hernández',
   email: 'jshernandezo97@gmail.com',
   github: 'https://github.com/JohanHdez',
-  linkedin: 'https://www.linkedin.com/in/johan-front-end-developer',
+  linkedin: 'https://www.linkedin.com/in/johan-ai-solutions-architect',
+  kmaleon: 'https://kmaleon.co',
+  cv: '/johan-hernandez-cv.pdf',
   location: 'Medellín, Colombia',
 };
 
 export const ui = {
   es: {
-    metaTitle: 'Johan Hernández — AI Solutions Architect',
+    metaTitle: 'Johan Hernández — AI Engineer & Solutions Architect',
     metaDescription:
-      'AI Solutions Architect en Medellín. Diseño y despliego sistemas multi-agente, automatizaciones y productos de IA de punta a punta.',
-    nav: { projects: 'Proyectos', services: 'Qué hago', experience: 'Experiencia', contact: 'Contacto' },
+      'AI Engineer en Medellín. Llevo sistemas de IA del prompt a producción: pipelines LLM, agentes de voz y sistemas multi-agente. Fundador de Kmaleon.',
+    nav: { work: 'Casos', how: 'Cómo trabajo', experience: 'Trayectoria', contact: 'Contacto', cv: 'CV' },
     hero: {
-      eyebrow: 'AI Solutions Architect · Medellín, Colombia',
-      title: 'Convierto procesos complejos en sistemas de IA que trabajan solos.',
-      lead: 'Más de 7 años de ingeniería. Diseño y despliego ecosistemas de IA de punta a punta: agentes que orquestan flujos de negocio, voz que atiende llamadas y productos que corren en producción.',
-      ctaPrimary: 'Ver proyectos',
-      ctaSecondary: 'Hablemos',
-      stats: [
-        { value: '7+', label: 'años de ingeniería' },
-        { value: '70%', label: 'menos llamadas manuales con Voice AI' },
-        { value: '6', label: 'agentes coordinados en un SaaS' },
-      ],
+      status: 'disponible para proyectos',
+      hello: 'Hola, soy',
+      line1: 'Llevo la IA',
+      line2: 'del prompt',
+      line3: 'a producción.',
+      lead: 'La mayoría de AI engineers entrega APIs, prototipos o notebooks. Yo entrego producto completo: una interfaz que la gente usa, desplegada, monitoreada y con métricas reales.',
+      ctaWork: 'Ver mis casos',
+      ctaCv: 'Descargar CV',
+      nowLabel: 'Ahora mismo',
+      nowTitle: 'Construyendo Kmaleon',
+      nowText: 'Búsqueda de empleo con IA para 17 países de LATAM. Soy el único ingeniero; el resto del equipo son 6 agentes de Claude Code.',
+      nowLink: 'Ver kmaleon.co',
     },
-    services: {
-      title: 'Qué hago',
-      items: [
-        {
-          title: 'Sistemas multi-agente',
-          text: 'Equipos de agentes con Claude Code y frameworks agénticos que se reparten el trabajo: investigan, deciden y ejecutan.',
-        },
-        {
-          title: 'Automatización de negocio',
-          text: 'Flujos en n8n, APIs en Node.js y pipelines que conectan CRM, WhatsApp y voz sin intervención manual.',
-        },
-        {
-          title: 'Voz y conversación',
-          text: 'Agentes de voz con Vapi, ElevenLabs y Twilio; transcripción en el navegador con Whisper.',
-        },
-        {
-          title: 'Producto de punta a punta',
-          text: 'Del MVP a producción: interfaz, backend, pagos, despliegue y la experiencia que hace que la IA se use.',
-        },
+    numbers: [
+      { value: '8+', label: 'años de ingeniería de software' },
+      { value: '1.5+', label: 'años con LLMs en producción' },
+      { value: '17', label: 'países que cubre Kmaleon' },
+      { value: '6', label: 'agentes en mi equipo de desarrollo' },
+    ],
+    how: {
+      kicker: 'Cómo trabajo',
+      title: 'Mi equipo son seis agentes. Las decisiones irreversibles las tomo yo.',
+      text: 'Cada agente tiene un rol, su propio contexto curado (CLAUDE.md) y un protocolo que no se salta. Se coordinan por GitHub Issues: así entrego como un equipo, sin dejar de ser responsable de cada línea que llega a producción.',
+      me: 'Yo',
+      meRole: 'apruebo lo irreversible',
+      steps: [
+        { n: '01', t: 'Investigar', d: 'El agente lee el código y el contexto antes de proponer nada.' },
+        { n: '02', t: 'Reportar', d: 'Explica qué encontró, qué haría y qué podría romperse.' },
+        { n: '03', t: 'Aprobar', d: 'Yo decido. Human-in-the-loop en todo lo que no se puede deshacer.' },
+        { n: '04', t: 'Implementar', d: 'Código, code review y deploy, con evidencia de que funciona.' },
       ],
+      footnote: 'El mismo patrón lo llevé a ARS Primera: un orquestador que coordina cuatro repositorios en producción.',
     },
-    projects: {
-      title: 'Proyectos',
-      subtitle: 'Sistemas en producción y productos propios que puedes probar.',
-      clientTitle: 'Trabajo con clientes',
-      clientSubtitle: 'Sistemas privados: el código no es público, los resultados sí.',
-      demo: 'Probar',
+    work: {
+      kicker: 'Casos',
+      title: 'Cosas que construí y están vivas',
+      role: 'Mi rol',
+      built: 'Qué construí',
+      visit: 'Visitar',
       code: 'Código',
       store: 'Chrome Web Store',
-      apk: 'Descargar APK (Android)',
       privateCode: 'Código privado del cliente',
-      requestCode: 'Solicitar acceso al código',
+    },
+    more: {
+      title: 'También construí',
+      apk: 'Descargar APK',
+      requestCode: 'Pedir acceso al código',
       requestSubject: 'Solicitud de acceso al código de',
+      code: 'Código',
     },
-    experience: {
-      title: 'Experiencia',
+    clients: {
+      kicker: 'Para clientes',
+      title: 'Automatizaciones que ya trabajan solas',
     },
-    stack: { title: 'Stack' },
+    experience: { kicker: 'Trayectoria', title: 'De frontend a arquitecto de IA', education: 'Formación' },
     contact: {
+      kicker: 'Contacto',
       title: '¿Tienes un proceso que debería hacerse solo?',
-      text: 'Cuéntame qué quieres automatizar y te digo cómo lo resolvería.',
-      email: 'Escríbeme',
+      text: 'Cuéntame qué quieres automatizar o qué producto quieres sacar. Te respondo con cómo lo resolvería.',
     },
-    footer: 'Hecho con Astro.',
+    footer: 'Diseñado y construido en Medellín.',
     langSwitch: 'EN',
+    localTime: 'en Medellín',
   },
   en: {
-    metaTitle: 'Johan Hernández — AI Solutions Architect',
+    metaTitle: 'Johan Hernández — AI Engineer & Solutions Architect',
     metaDescription:
-      'AI Solutions Architect based in Medellín. I design and deploy end-to-end multi-agent systems, automations and AI products.',
-    nav: { projects: 'Projects', services: 'What I do', experience: 'Experience', contact: 'Contact' },
+      'AI Engineer based in Medellín. I take AI systems from prompt to production: LLM pipelines, voice agents and multi-agent systems. Founder of Kmaleon.',
+    nav: { work: 'Work', how: 'How I work', experience: 'Experience', contact: 'Contact', cv: 'CV' },
     hero: {
-      eyebrow: 'AI Solutions Architect · Medellín, Colombia',
-      title: 'I turn complex workflows into AI systems that run on their own.',
-      lead: '7+ years of engineering. I design and deploy end-to-end AI ecosystems: agents that orchestrate business workflows, voice that answers calls, and products that run in production.',
-      ctaPrimary: 'See projects',
-      ctaSecondary: "Let's talk",
-      stats: [
-        { value: '7+', label: 'years of engineering' },
-        { value: '70%', label: 'fewer manual calls with Voice AI' },
-        { value: '6', label: 'coordinated agents in one SaaS' },
-      ],
+      status: 'open to projects',
+      hello: "Hi, I'm",
+      line1: 'I take AI',
+      line2: 'from prompt',
+      line3: 'to production.',
+      lead: 'Most AI engineers ship APIs, prototypes or notebooks. I ship the whole product: an interface people actually use, deployed, monitored and with real metrics.',
+      ctaWork: 'See my work',
+      ctaCv: 'Download CV',
+      nowLabel: 'Right now',
+      nowTitle: 'Building Kmaleon',
+      nowText: "AI job search for 17 Latin American countries. I'm the only engineer; the rest of the team is 6 Claude Code agents.",
+      nowLink: 'Visit kmaleon.co',
     },
-    services: {
-      title: 'What I do',
-      items: [
-        {
-          title: 'Multi-agent systems',
-          text: 'Agent teams built with Claude Code and agentic frameworks that split the work: they research, decide and execute.',
-        },
-        {
-          title: 'Business automation',
-          text: 'n8n workflows, Node.js APIs and pipelines that connect CRM, WhatsApp and voice with no manual steps.',
-        },
-        {
-          title: 'Voice & conversation',
-          text: 'Voice agents with Vapi, ElevenLabs and Twilio; in-browser transcription with Whisper.',
-        },
-        {
-          title: 'End-to-end product',
-          text: 'From MVP to production: interface, backend, payments, deployment and the UX that makes AI actually get used.',
-        },
+    numbers: [
+      { value: '8+', label: 'years of software engineering' },
+      { value: '1.5+', label: 'years shipping LLMs to production' },
+      { value: '17', label: 'countries covered by Kmaleon' },
+      { value: '6', label: 'agents on my dev team' },
+    ],
+    how: {
+      kicker: 'How I work',
+      title: 'My team is six agents. I make the irreversible calls.',
+      text: 'Each agent has a role, its own curated context (CLAUDE.md) and a protocol it never skips. They coordinate through GitHub Issues, so I deliver like a team while staying accountable for every line that reaches production.',
+      me: 'Me',
+      meRole: 'I approve the irreversible',
+      steps: [
+        { n: '01', t: 'Investigate', d: 'The agent reads the code and context before proposing anything.' },
+        { n: '02', t: 'Report', d: 'It explains what it found, what it would do and what could break.' },
+        { n: '03', t: 'Approve', d: 'I decide. Human-in-the-loop for everything that can’t be undone.' },
+        { n: '04', t: 'Implement', d: 'Code, code review and deploy, with evidence that it works.' },
       ],
+      footnote: 'I brought the same pattern to ARS Primera: an orchestrator coordinating four repositories in production.',
     },
-    projects: {
-      title: 'Projects',
-      subtitle: 'Systems in production and my own products you can try.',
-      clientTitle: 'Client work',
-      clientSubtitle: 'Private systems: the code is closed, the results are not.',
-      demo: 'Try it',
+    work: {
+      kicker: 'Work',
+      title: 'Things I built that are live',
+      role: 'My role',
+      built: 'What I built',
+      visit: 'Visit',
       code: 'Code',
       store: 'Chrome Web Store',
-      apk: 'Download APK (Android)',
       privateCode: 'Private client code',
+    },
+    more: {
+      title: 'I also built',
+      apk: 'Download APK',
       requestCode: 'Request code access',
       requestSubject: 'Code access request for',
+      code: 'Code',
     },
-    experience: {
-      title: 'Experience',
+    clients: {
+      kicker: 'For clients',
+      title: 'Automations that already run on their own',
     },
-    stack: { title: 'Stack' },
+    experience: { kicker: 'Experience', title: 'From frontend to AI architect', education: 'Education' },
     contact: {
+      kicker: 'Contact',
       title: 'Got a process that should run by itself?',
-      text: "Tell me what you want to automate and I'll tell you how I'd solve it.",
-      email: 'Email me',
+      text: "Tell me what you want to automate or the product you want to ship. I'll reply with how I'd solve it.",
     },
-    footer: 'Built with Astro.',
+    footer: 'Designed and built in Medellín.',
     langSwitch: 'ES',
+    localTime: 'in Medellín',
   },
 } as const;
 
-type T = { es: string; en: string };
+export const agents = [
+  { es: 'Director', en: 'Director' },
+  { es: 'Arquitecto', en: 'Architect' },
+  { es: 'Frontend', en: 'Frontend' },
+  { es: 'Backend', en: 'Backend' },
+  { es: 'Database', en: 'Database' },
+  { es: 'DevOps', en: 'DevOps' },
+];
 
-export interface Project {
-  slug: string;
-  name: string;
-  tagline: T;
-  description: T;
-  highlights: { es: string[]; en: string[] };
-  tags: string[];
-  repo?: string;
-  demo?: string;
-  store?: string;
-  apk?: string; // enlace de descarga del APK (p. ej. GitHub Releases)
-  badge?: T; // etiqueta destacada, p. ej. "En producción"
-  privateCode?: boolean; // código de cliente, no público
-  codeOnRequest?: boolean; // repo privado: acceso bajo solicitud por correo
-  image?: string; // captura en /public/projects
-  imageAlt?: T;
-  accent: string; // color del bloque visual
-  glyph: string; // símbolo del bloque visual
-  featured?: boolean;
+export interface Shot {
+  src: string;
+  alt: T;
+  url?: string; // texto en la barra del navegador
+  kind?: 'browser' | 'phone' | 'panel';
 }
 
-export const projects: Project[] = [
+export interface CaseStudy {
+  slug: string;
+  name: string;
+  year: string;
+  badge?: T;
+  title: T;
+  summary: T;
+  role: T;
+  built: TL;
+  metrics: { value: string; label: T }[];
+  stack: string[];
+  shots: Shot[];
+  links: { label: 'visit' | 'code' | 'store'; href: string }[];
+  privateCode?: boolean;
+  accent: string;
+}
+
+export const cases: CaseStudy[] = [
   {
-    slug: 'pbm-farmasalud',
-    name: 'FarmaSalud PBM',
-    featured: true,
-    privateCode: true,
-    accent: '#3fb6ff',
-    glyph: '✚',
-    image: '/projects/pbm-resumen.webp',
-    imageAlt: {
-      es: 'Panel de autorizaciones del Design System de FarmaSalud PBM (datos de ejemplo)',
-      en: 'FarmaSalud PBM Design System authorizations dashboard (sample data)',
+    slug: 'kmaleon',
+    name: 'Kmaleon',
+    year: '2024 —',
+    badge: { es: 'Mi startup · prelanzamiento', en: 'My startup · pre-launch' },
+    accent: '#3f8f5a',
+    title: {
+      es: 'Búsqueda de empleo con IA, pensada para Latinoamérica',
+      en: 'AI job search built for Latin America',
     },
-    badge: { es: 'En producción', en: 'In production' },
-    tagline: {
-      es: 'Arquitectura agéntica para el ecosistema de farmacias de ARS Primera: 4 proyectos entregados',
-      en: 'Agentic architecture for ARS Primera’s pharmacy ecosystem: 4 projects delivered',
+    summary: {
+      es: 'SaaS B2C que reúne vacantes de 5 portales para 17 países, analiza tu CV contra cada oferta y lo adapta para que pases los filtros ATS. Lo diseñé, lo construí y lo opero yo solo, con un equipo de 6 agentes.',
+      en: 'B2C SaaS that gathers jobs from 5 boards across 17 countries, scores your CV against each posting and tailors it to get past ATS filters. I designed, built and run it alone, with a team of 6 agents.',
     },
-    description: {
-      es: 'Ecosistema PBM de ARS Primera (República Dominicana): portales de Farmacias, Gestión Médica y Gestión de Programas que manejan autorizaciones, consumo de afiliados y prestadores, sobre un Design System compartido.',
-      en: 'ARS Primera’s PBM ecosystem (Dominican Republic): Pharmacies, Medical Management and Program Management portals handling authorizations, member consumption and providers, on a shared Design System.',
-    },
-    highlights: {
+    role: { es: 'Fundador y único ingeniero', en: 'Founder and sole engineer' },
+    built: {
       es: [
-        'Diseñé y monté la arquitectura agéntica del proyecto: un orquestador con Claude Code y agentes especializados que reciben cada historia de usuario, la verifican, la enrutan al repo correcto y auditan el drift entre repos',
-        '4 proyectos del ecosistema de farmacias finalizados y en producción: 3 portales React 19 + BFF .NET 10 (Clean Architecture + DDD) y un Design System de 33 familias de componentes',
+        'Pipeline de análisis ATS con Anthropic Claude: keywords, scoring de match perfil-vacante y recomendaciones, respetando el idioma de la oferta (ES/EN)',
+        'Optimizador de CV que identifica brechas y reescribe secciones sin inventar: los hechos verificables se preservan por diseño del prompt',
+        'Matching semántico con vacantes de JSearch, RemoteOK, Remotive, TheMuse y Computrabajo',
+        'Producción real: NestJS + MongoDB Atlas + BullMQ/Redis en Railway, React en Cloudflare Pages, logs con correlation IDs y caché de respuestas LLM para bajar costos',
+      ],
+      en: [
+        'ATS analysis pipeline on Anthropic Claude: keywords, profile-to-job match scoring and recommendations, keeping the posting’s language (ES/EN)',
+        'CV optimizer that finds gaps and rewrites sections without inventing: verifiable facts are preserved by prompt design',
+        'Semantic matching against jobs from JSearch, RemoteOK, Remotive, TheMuse and Computrabajo',
+        'Real production: NestJS + MongoDB Atlas + BullMQ/Redis on Railway, React on Cloudflare Pages, correlation-ID logging and LLM response caching to cut costs',
+      ],
+    },
+    metrics: [
+      { value: '17', label: { es: 'países', en: 'countries' } },
+      { value: '5', label: { es: 'fuentes de vacantes', en: 'job sources' } },
+      { value: '6', label: { es: 'agentes construyéndolo', en: 'agents building it' } },
+    ],
+    stack: ['Anthropic Claude', 'NestJS', 'MongoDB Atlas', 'BullMQ + Redis', 'React', 'Railway', 'Cloudflare Pages'],
+    shots: [
+      { src: '/projects/kmaleon.webp', url: 'kmaleon.co', kind: 'browser', alt: { es: 'Portada de Kmaleon: búsqueda de empleo pensada para Latinoamérica', en: 'Kmaleon homepage: job search built for Latin America' } },
+      { src: '/projects/kmaleon-mobile.webp', kind: 'phone', alt: { es: 'Kmaleon en el celular', en: 'Kmaleon on mobile' } },
+    ],
+    links: [{ label: 'visit', href: 'https://kmaleon.co' }],
+  },
+  {
+    slug: 'pbm',
+    name: 'FarmaSalud PBM',
+    year: '2026',
+    badge: { es: 'En producción', en: 'In production' },
+    accent: '#1d6fb8',
+    privateCode: true,
+    title: {
+      es: 'Arquitectura agéntica para el ecosistema de farmacias de ARS Primera',
+      en: 'Agentic architecture for ARS Primera’s pharmacy ecosystem',
+    },
+    summary: {
+      es: 'Plataforma de gestión farmacéutica de una aseguradora de salud en República Dominicana: autorizaciones, consumo de afiliados y prestadores. Monté la arquitectura agéntica que coordina sus cuatro repositorios y se entregaron 4 proyectos.',
+      en: 'Pharmacy benefit management platform for a health insurer in the Dominican Republic: authorizations, member consumption and providers. I set up the agentic architecture that coordinates its four repositories, and 4 projects were delivered.',
+    },
+    role: { es: 'AI Architect & Full-stack Engineer', en: 'AI Architect & Full-stack Engineer' },
+    built: {
+      es: [
+        'Orquestador con Claude Code y agentes especializados que reciben cada historia de usuario, la verifican contra el código, la envían al repo correcto y auditan el drift entre repos',
+        'Portales de Farmacias, Gestión Médica y Gestión de Programas en React 19 con BFF .NET 10 (Clean Architecture + DDD)',
+        'Design System compartido de 33 familias de componentes',
         'Corrección de incidentes de producción en autorizaciones y consumo de afiliados',
       ],
       en: [
-        'Designed and set up the project’s agentic architecture: a Claude Code orchestrator with specialized agents that take each user story, verify it, route it to the right repo and audit cross-repo drift',
-        '4 pharmacy-ecosystem projects delivered and in production: 3 React 19 portals + .NET 10 BFFs (Clean Architecture + DDD) and a 33-family component Design System',
+        'Claude Code orchestrator with specialized agents that take each user story, verify it against the code, route it to the right repo and audit cross-repo drift',
+        'Pharmacies, Medical Management and Program Management portals in React 19 with .NET 10 BFFs (Clean Architecture + DDD)',
+        'Shared Design System with 33 component families',
         'Production incident fixes in authorizations and member consumption',
       ],
     },
-    tags: ['Agentic architecture', 'Multi-agent', 'Claude Code', 'React 19', '.NET 10', 'TypeScript', 'Design System', 'Azure DevOps'],
+    metrics: [
+      { value: '4', label: { es: 'proyectos entregados', en: 'projects delivered' } },
+      { value: '4', label: { es: 'repos orquestados', en: 'repos orchestrated' } },
+      { value: '33', label: { es: 'familias de componentes', en: 'component families' } },
+    ],
+    stack: ['Claude Code', 'React 19', '.NET 10', 'TypeScript', 'Tailwind 4', 'Azure DevOps'],
+    shots: [
+      { src: '/projects/pbm-resumen.webp', url: 'design-system · playground', kind: 'browser', alt: { es: 'Panel de autorizaciones del Design System de FarmaSalud (datos de ejemplo)', en: 'FarmaSalud Design System authorizations dashboard (sample data)' } },
+    ],
+    links: [],
   },
   {
     slug: 'english-coach',
     name: 'English Coach',
-    featured: true,
-    accent: '#7c5cff',
-    glyph: '◉',
-    tagline: {
-      es: 'Coach de inglés con IA, publicado en la Chrome Web Store',
-      en: 'AI English coach, live on the Chrome Web Store',
+    year: '2026',
+    badge: { es: 'En la Chrome Web Store · 5.0 ★', en: 'On the Chrome Web Store · 5.0 ★' },
+    accent: '#5b5bd6',
+    title: {
+      es: 'Un coach de inglés que escucha tus reuniones, sin mandar tu audio a nadie',
+      en: 'An English coach that listens to your meetings without sending your audio anywhere',
     },
-    description: {
-      es: 'Extensión de Chrome que graba por separado tu micrófono y el audio de la pestaña, transcribe la conversación por hablante y genera un reporte de tu inglés.',
-      en: 'Chrome extension that records your microphone and the tab audio as separate tracks, transcribes the conversation by speaker and writes a report on your English.',
+    summary: {
+      es: 'Lo hice porque lo necesitaba: hablo inglés en reuniones de trabajo y quería saber qué decía mal. La extensión graba por separado tu voz y la del otro, transcribe con Whisper dentro del navegador y un LLM te sugiere respuestas y te deja un informe. Tiene también versión PWA para reuniones presenciales.',
+      en: 'I built it because I needed it: I speak English in work meetings and wanted to know what I got wrong. The extension records your voice and the other person’s separately, transcribes with Whisper inside the browser, and an LLM suggests answers and leaves you a report. There is also a PWA for in-person meetings.',
     },
-    highlights: {
+    role: { es: 'Autor', en: 'Author' },
+    built: {
       es: [
-        'Whisper corre dentro del navegador (transformers.js + ONNX): el audio no sale del equipo',
-        'Coach con LLM (Groq gratis o Claude) que sugiere respuestas y frases',
-        'Traducción en vivo con el traductor integrado de Chrome',
+        'Whisper corriendo en el navegador (transformers.js + ONNX): el audio no sale del equipo',
+        'Coach con LLM (Groq gratis o Claude) que propone respuestas, frases y un informe de la sesión',
+        'PWA que distingue tu voz de la del interlocutor por huella de voz, con un solo micrófono',
+        'Sin build ni dependencias, con pruebas unitarias y e2e',
       ],
       en: [
-        'Whisper runs inside the browser (transformers.js + ONNX): audio never leaves the machine',
-        'LLM coach (free Groq or Claude) that suggests answers and phrases',
-        "Live translation with Chrome's built-in translator",
+        'Whisper running in the browser (transformers.js + ONNX): audio never leaves the machine',
+        'LLM coach (free Groq or Claude) that suggests answers, phrases and a session report',
+        'PWA that tells your voice from the other speaker by voice print, with one microphone',
+        'No build, no dependencies, with unit and e2e tests',
       ],
     },
-    tags: ['Chrome MV3', 'Whisper', 'ONNX', 'LLM', 'JavaScript'],
-    repo: 'https://github.com/JohanHdez/english-coach',
-    store:
-      'https://chromewebstore.google.com/detail/english-coach-%E2%80%94-transcrip/oghhgmcnchilddbnigfnklehimieimhm',
+    metrics: [
+      { value: '5.0★', label: { es: 'en la Chrome Web Store', en: 'on the Chrome Web Store' } },
+      { value: '0', label: { es: 'audio enviado a servidores', en: 'audio sent to servers' } },
+    ],
+    stack: ['Chrome MV3', 'Whisper', 'ONNX Runtime', 'LLM', 'PWA', 'Web Audio'],
+    shots: [
+      { src: '/projects/english-coach-panel.webp', kind: 'panel', alt: { es: 'Panel lateral de English Coach con frases y controles', en: 'English Coach side panel with phrases and controls' } },
+    ],
+    links: [
+      { label: 'store', href: 'https://chromewebstore.google.com/detail/english-coach-%E2%80%94-transcrip/oghhgmcnchilddbnigfnklehimieimhm' },
+      { label: 'code', href: 'https://github.com/JohanHdez/english-coach' },
+    ],
   },
   {
-    slug: 'english-coach-pwa',
-    name: 'English Coach PWA',
-    featured: true,
-    accent: '#22c3a6',
-    glyph: '◐',
-    tagline: {
-      es: 'Un solo micrófono, dos voces: separa quién habla por huella de voz',
-      en: 'One microphone, two voices: tells speakers apart by voice print',
-    },
-    description: {
-      es: 'App instalable para reuniones en inglés: distingue tu voz de la del interlocutor, transcribe, traduce y te sugiere qué responder en tiempo real.',
-      en: 'Installable app for meetings in English: tells your voice from the other speaker, transcribes, translates and suggests what to answer in real time.',
-    },
-    highlights: {
-      es: [
-        'Identificación de hablante con un modelo de embeddings de voz en el navegador',
-        'Sin build ni dependencias: módulos puros con pruebas unitarias y e2e',
-        'Funciona offline después de la primera carga (service worker)',
-      ],
-      en: [
-        'Speaker identification with an in-browser voice embedding model',
-        'No build, no dependencies: pure modules with unit and e2e tests',
-        'Works offline after the first load (service worker)',
-      ],
-    },
-    tags: ['PWA', 'Speaker ID', 'Whisper', 'LLM', 'Web Audio'],
-    repo: 'https://github.com/JohanHdez/English-coah-app',
-  },
-  {
-    slug: 'chapamonedero',
+    slug: 'chapa',
     name: 'Chapa Monedero',
-    featured: true,
-    accent: '#ffb547',
-    glyph: '◎',
-    tagline: {
-      es: 'E-commerce multipaís con Mercado Pago, construido con un equipo de agentes',
-      en: 'Multi-country e-commerce with Mercado Pago, built with an agent team',
+    year: '2026',
+    badge: { es: 'Vendiendo en CO y MX', en: 'Selling in CO and MX' },
+    accent: '#1f6feb',
+    title: {
+      es: 'E-commerce para un fabricante: dos países, dos monedas, un solo código',
+      en: 'E-commerce for a manufacturer: two countries, two currencies, one codebase',
     },
-    description: {
-      es: 'Landing y checkout para vender una cerradura mecánica de monedas en México y Colombia, cada país con su dominio, moneda y medios de pago locales.',
-      en: 'Landing and checkout to sell a mechanical coin lock in Mexico and Colombia, each country with its own domain, currency and local payment methods.',
+    summary: {
+      es: 'Landing y checkout para ARCAS, que fabrica una cerradura mecánica de monedas para baños públicos. Cada país tiene su dominio, su moneda y su cuenta de Mercado Pago, con los medios de pago que la gente usa allá.',
+      en: 'Landing and checkout for ARCAS, which makes a mechanical coin lock for public restrooms. Each country has its own domain, currency and Mercado Pago account, with the payment methods people actually use there.',
     },
-    highlights: {
+    role: { es: 'Desarrollo de punta a punta', en: 'End-to-end development' },
+    built: {
       es: [
-        'Pagos con tarjeta, OXXO, SPEI, PSE, Nequi y Bancolombia',
-        'Webhooks con reglas de seguridad de pagos verificadas por hooks de Claude Code',
-        'Subagentes, comandos y skills propios en el repositorio',
+        'Checkout con tarjeta, OXXO, SPEI, PSE, Nequi y Bancolombia',
+        'Webhooks de pago cuyas reglas de seguridad se verifican con hooks de Claude Code',
+        'Subagentes, comandos y skills propios dentro del repositorio',
       ],
       en: [
-        'Card, OXXO, SPEI, PSE, Nequi and Bancolombia payments',
-        'Webhooks whose payment-security rules are enforced by Claude Code hooks',
-        'Custom subagents, commands and skills in the repo',
+        'Checkout with card, OXXO, SPEI, PSE, Nequi and Bancolombia',
+        'Payment webhooks whose security rules are enforced by Claude Code hooks',
+        'Custom subagents, commands and skills inside the repo',
       ],
     },
-    tags: ['Next.js 14', 'TypeScript', 'Mercado Pago', 'Claude Code', 'Vercel'],
-    repo: 'https://github.com/JohanHdez/chapamonedero',
-    demo: 'https://chapamonedero.vercel.app',
+    metrics: [
+      { value: '2', label: { es: 'países', en: 'countries' } },
+      { value: '6', label: { es: 'medios de pago locales', en: 'local payment methods' } },
+    ],
+    stack: ['Next.js 14', 'TypeScript', 'Mercado Pago', 'Claude Code', 'Vercel'],
+    shots: [
+      { src: '/projects/chapa-monedero.webp', url: 'chapamonedero.vercel.app/co', kind: 'browser', alt: { es: 'Landing de Chapa Monedero para Colombia', en: 'Chapa Monedero landing for Colombia' } },
+    ],
+    links: [
+      { label: 'visit', href: 'https://chapamonedero.vercel.app' },
+      { label: 'code', href: 'https://github.com/JohanHdez/chapamonedero' },
+    ],
   },
   {
-    slug: 'vinyl-player',
+    slug: 'vinyl',
     name: 'Vinyl Player',
-    featured: true,
-    accent: '#ff6b6b',
-    glyph: '◍',
-    tagline: {
-      es: 'Tocadiscos web con sesiones colaborativas en tiempo real',
-      en: 'Web turntable with real-time collaborative sessions',
+    year: '2026',
+    accent: '#c2410c',
+    title: {
+      es: 'Un tocadiscos en el navegador para escuchar música en grupo',
+      en: 'A turntable in the browser for listening to music together',
     },
-    description: {
-      es: 'Reproductor de música de YouTube con un tocadiscos animado y "Jam Sessions": los invitados entran con un QR y comparten la misma playlist.',
-      en: 'YouTube music player with an animated turntable and "Jam Sessions": guests join with a QR code and share the same playlist.',
+    summary: {
+      es: 'Reproductor de YouTube con un tocadiscos animado y "Jam Sessions": el anfitrión comparte un QR, los invitados se unen y todos manejan la misma playlist en tiempo real.',
+      en: 'YouTube player with an animated turntable and "Jam Sessions": the host shares a QR code, guests join and everyone controls the same playlist in real time.',
     },
-    highlights: {
+    role: { es: 'Autor', en: 'Author' },
+    built: {
       es: [
-        'Tocadiscos animado: el vinilo gira con la portada de la canción y el brazo baja al reproducir',
-        'Jam Sessions: el anfitrión comparte un QR y los invitados se unen a una playlist sincronizada con Socket.IO',
-        'Cada invitado elige escuchar en su dispositivo o en el del anfitrión; reconexión automática de 5 min',
-        'Busca en YouTube o pega una URL, sin API key, y se despliega con Docker',
+        'El vinilo gira con la portada de la canción y el brazo baja al reproducir',
+        'Playlist sincronizada con Socket.IO; cada invitado escucha en su dispositivo o en el del anfitrión',
+        'Reconexión automática y búsqueda en YouTube sin API key; se despliega con Docker',
       ],
       en: [
-        'Animated turntable: the record spins with the song cover and the tonearm drops on play',
-        'Jam Sessions: the host shares a QR code and guests join a playlist synced with Socket.IO',
-        'Each guest listens on their own device or the host’s; 5-minute automatic reconnection',
-        'Search YouTube or paste a URL with no API key; ships with Docker',
+        'The record spins with the song cover and the tonearm drops on play',
+        'Playlist synced with Socket.IO; each guest listens on their device or the host’s',
+        'Automatic reconnection and YouTube search with no API key; ships with Docker',
       ],
     },
-    tags: ['Angular 21', 'TypeScript', 'Express 5', 'Socket.IO', 'Real-time', 'Docker'],
-    repo: 'https://github.com/JohanHdez/vinyl-player',
-    image: '/projects/vinyl-player.webp',
-    imageAlt: { es: 'Vinyl Player: tocadiscos reproduciendo y cola de reproducción', en: 'Vinyl Player: turntable playing and play queue' },
+    metrics: [],
+    stack: ['Angular 21', 'Express 5', 'Socket.IO', 'Docker'],
+    shots: [
+      { src: '/projects/vinyl-player.webp', url: 'localhost:3001', kind: 'browser', alt: { es: 'Vinyl Player: tocadiscos reproduciendo', en: 'Vinyl Player: turntable playing' } },
+    ],
+    links: [{ label: 'code', href: 'https://github.com/JohanHdez/vinyl-player' }],
   },
+];
+
+export interface SmallProject {
+  name: string;
+  text: T;
+  tags: string[];
+  image: string;
+  imageAlt: T;
+  apk?: string;
+  codeOnRequest?: boolean;
+  repo?: string;
+}
+
+export const smallProjects: SmallProject[] = [
   {
-    slug: 'fallen-legends-3d',
-    codeOnRequest: true,
     name: 'Fallen Legends 3D',
-    accent: '#5aa9ff',
-    glyph: '◆',
-    tagline: {
-      es: 'Juego de rol de acción en 3D con bots y modo en línea',
-      en: '3D action RPG with bots and online play',
+    text: {
+      es: 'ARPG en tercera persona hecho en Godot: modo Horda de 10 oleadas y combates de 1v1 a 4v4 contra bots, con modo en línea.',
+      en: 'Third-person ARPG built in Godot: a 10-wave Horde mode and 1v1 to 4v4 fights against bots, with online play.',
     },
-    description: {
-      es: 'ARPG en tercera persona hecho en Godot: modo Horda de 10 oleadas y combates por equipos de 1v1 a 4v4 contra bots, con servidor para jugar en línea.',
-      en: 'Third-person ARPG built in Godot: a 10-wave Horde mode and 1v1 to 4v4 team fights against bots, with a server for online play.',
-    },
-    highlights: {
-      es: ['IA de bots para compañeros y rivales', 'Mapa procedural y exportación a Android'],
-      en: ['Bot AI for allies and enemies', 'Procedural map and Android export'],
-    },
-    tags: ['Godot 4', 'GDScript', 'Game AI', 'Multiplayer', 'Android'],
+    tags: ['Godot 4', 'Game AI', 'Android'],
     image: '/projects/fallen-legends-3d.webp',
     imageAlt: { es: 'Fallen Legends 3D: combate contra la horda en el bosque', en: 'Fallen Legends 3D: fighting the horde in the forest' },
     apk: 'https://drive.google.com/file/d/11vD-vsULm-V3ioa2qACETLnN7IefMEFf/view',
-  },
-  {
-    slug: 'fallen-legends',
     codeOnRequest: true,
-    name: 'Fallen Legends',
-    accent: '#a78bfa',
-    glyph: '◇',
-    tagline: {
-      es: 'ARPG isométrico en 2D, el juego original de la saga',
-      en: 'Isometric 2D ARPG, the original game of the saga',
-    },
-    description: {
-      es: 'El juego hermano en 2D de Fallen Legends 3D: mismo mundo, leyendas y balance, con mazmorras generadas y modo Horda.',
-      en: 'The 2D sibling of Fallen Legends 3D: same world, legends and balance, with generated dungeons and Horde mode.',
-    },
-    highlights: {
-      es: ['Generación procedural de mazmorras', 'Exportado a Android'],
-      en: ['Procedural dungeon generation', 'Exported to Android'],
-    },
-    tags: ['Godot 4', 'GDScript', '2D isometric', 'Android'],
-    image: '/projects/fallen-legends-2d.webp',
-    imageAlt: { es: 'Fallen Legends: mazmorra isométrica con enemigos y jefe', en: 'Fallen Legends: isometric dungeon with enemies and boss' },
-    apk: 'https://drive.google.com/file/d/15DNWNpVLzrVBKJGhTV7UvVOtxdNjtxXF/view',
   },
   {
-    slug: 'nails',
+    name: 'Fallen Legends',
+    text: {
+      es: 'El original en 2D isométrico: mazmorras generadas, jefes y siete leyendas con habilidades propias.',
+      en: 'The isometric 2D original: generated dungeons, bosses and seven legends with their own abilities.',
+    },
+    tags: ['Godot 4', '2D isometric', 'Android'],
+    image: '/projects/fallen-legends-2d.webp',
+    imageAlt: { es: 'Fallen Legends: mazmorra isométrica con enemigos', en: 'Fallen Legends: isometric dungeon with enemies' },
+    apk: 'https://drive.google.com/file/d/15DNWNpVLzrVBKJGhTV7UvVOtxdNjtxXF/view',
+    codeOnRequest: true,
+  },
+  {
     name: 'Alejandra Ochoa Nails',
-    accent: '#e8789a',
-    glyph: '❖',
-    tagline: {
-      es: 'Sitio para un estudio de uñas con video controlado por scroll',
-      en: 'Nail studio website with scroll-driven video',
+    text: {
+      es: 'Sitio para un estudio de uñas en Copacabana, Antioquia, con video que avanza con el scroll.',
+      en: 'Website for a nail studio in Copacabana, Antioquia, with scroll-driven video.',
     },
-    description: {
-      es: 'Sitio de una página para un negocio local de Copacabana, Antioquia: el video avanza cuadro a cuadro con el scroll y los servicios se muestran en un bento grid.',
-      en: 'One-page site for a local business in Copacabana, Antioquia: video scrubs frame by frame with scroll and services sit in a bento grid.',
-    },
-    highlights: {
-      es: ['HTML, CSS y JS sin frameworks', 'Totalmente responsive'],
-      en: ['Vanilla HTML, CSS and JS', 'Fully responsive'],
-    },
-    tags: ['HTML', 'CSS', 'JavaScript', 'Client work'],
+    tags: ['HTML', 'CSS', 'JavaScript'],
     image: '/projects/nails.webp',
     imageAlt: { es: 'Portada del sitio de Alejandra Ochoa Nails', en: 'Alejandra Ochoa Nails website hero' },
     repo: 'https://github.com/JohanHdez/nails',
@@ -391,78 +439,93 @@ export const projects: Project[] = [
 
 export const clientWork = [
   {
-    title: { es: 'Job Agent SaaS', en: 'Job Agent SaaS' },
+    name: 'Planet Entertainment',
+    title: { es: 'Agentes de voz que agendan citas', en: 'Voice agents that book appointments' },
     text: {
-      es: 'Monorepo en TypeScript con un equipo de 6 agentes de Claude Code que automatiza la búsqueda de empleo y el emparejamiento de candidatos.',
-      en: 'TypeScript monorepo powered by a 6-agent Claude Code team that automates job search and candidate matching.',
+      es: 'Sistema multi-agente de voz con Vapi, ElevenLabs y Twilio: conversación multi-turno, integración con CRM, follow-ups y paso a un humano cuando hace falta.',
+      en: 'Multi-agent voice system on Vapi, ElevenLabs and Twilio: multi-turn conversation, CRM integration, follow-ups and handoff to a human when needed.',
     },
-    tags: ['Multi-agent', 'TypeScript', 'Claude Code'],
+    result: { es: '−70% de tiempo en llamadas manuales', en: '−70% manual call handling time' },
   },
   {
-    title: { es: 'Voice AI para agendamiento', en: 'Voice AI scheduling' },
+    name: 'WhatsApp ↔ Voz',
+    title: { es: 'Microservicio de automatización reutilizable', en: 'Reusable automation microservice' },
     text: {
-      es: 'Agentes de voz con Vapi, ElevenLabs y Twilio que agendan citas solos. Redujo en 70% las llamadas atendidas a mano.',
-      en: 'Voice agents built on Vapi, ElevenLabs and Twilio that book appointments on their own. Cut manual call handling by 70%.',
+      es: 'Workflows en n8n con backend Node.js que recogen datos de CRM, validan con OTP y conectan WhatsApp con voz.',
+      en: 'n8n workflows with a Node.js backend that collect CRM data, validate with OTP and bridge WhatsApp and voice.',
     },
-    tags: ['Vapi', 'ElevenLabs', 'Twilio'],
+    result: { es: 'Onboarding de clientes: de días a horas', en: 'Client onboarding: from days to hours' },
   },
   {
-    title: { es: 'LinkedIn Job Bot', en: 'LinkedIn Job Bot' },
+    name: 'Job Agent',
+    title: { es: 'Agente autónomo de vacantes', en: 'Autonomous job agent' },
     text: {
-      es: 'Agente autónomo que califica ofertas y se postula sin intervención manual.',
-      en: 'Autonomous agent that qualifies job postings and applies with zero manual intervention.',
+      es: 'Sistema multi-agente en TypeScript que busca oportunidades, las califica semánticamente y genera reportes sin intervención manual. Fue la semilla de Kmaleon.',
+      en: 'TypeScript multi-agent system that finds openings, scores them semantically and writes reports with no manual work. It was the seed of Kmaleon.',
     },
-    tags: ['Agents', 'Automation'],
-  },
-  {
-    title: { es: 'Microservicios de IA en n8n', en: 'AI microservices on n8n' },
-    text: {
-      es: 'Flujos reutilizables que integran datos de CRM y conectan WhatsApp con voz.',
-      en: 'Reusable workflows that integrate CRM data and bridge WhatsApp to voice.',
-    },
-    tags: ['n8n', 'WhatsApp API', 'CRM'],
+    result: { es: 'Cero pasos manuales', en: 'Zero manual steps' },
   },
 ];
 
 export const experience = [
   {
+    period: { es: 'May 2024 — hoy', en: 'May 2024 — now' },
+    role: { es: 'AI Engineer & Fundador', en: 'AI Engineer & Founder' },
+    org: { es: 'Kmaleon', en: 'Kmaleon' },
+    text: {
+      es: 'SaaS de búsqueda de empleo con IA para 17 países. Pipelines LLM en producción y un equipo de 6 agentes de Claude Code.',
+      en: 'AI job search SaaS for 17 countries. Production LLM pipelines and a team of 6 Claude Code agents.',
+    },
+  },
+  {
+    period: { es: 'May — Nov 2026', en: 'May — Nov 2026' },
     role: { es: 'AI Architect & Full-stack Engineer', en: 'AI Architect & Full-stack Engineer' },
-    org: 'ARS Primera · FarmaSalud PBM',
-    period: { es: 'May – Nov 2026', en: 'May – Nov 2026' },
+    org: { es: 'ARS Primera · FarmaSalud PBM', en: 'ARS Primera · FarmaSalud PBM' },
     text: {
-      es: 'Monté la arquitectura agéntica del proyecto y la orquestación multi-agente con Claude Code que coordina los cuatro repositorios del ecosistema. Se finalizaron 4 proyectos de farmacias, hoy en producción: los portales de Farmacias, Gestión Médica y Gestión de Programas (React 19 + .NET 10) y el Design System.',
-      en: 'I set up the project’s agentic architecture and the Claude Code multi-agent orchestration that coordinates the ecosystem’s four repositories. 4 pharmacy projects were delivered and are now in production: the Pharmacies, Medical Management and Program Management portals (React 19 + .NET 10) and the Design System.',
+      es: 'Arquitectura agéntica y orquestación de cuatro repositorios. 4 proyectos de farmacias entregados y en producción.',
+      en: 'Agentic architecture and orchestration of four repositories. 4 pharmacy projects delivered and in production.',
     },
   },
   {
-    role: { es: 'AI Solutions Architect (independiente)', en: 'AI Solutions Architect (independent)' },
-    org: '',
+    period: { es: 'May 2024 — hoy', en: 'May 2024 — now' },
+    role: { es: 'AI Solutions Architect', en: 'AI Solutions Architect' },
+    org: { es: 'Clientes directos', en: 'Direct clients' },
     text: {
-      es: 'Diseño flujos agénticos y MVPs de IA sobre infraestructura propia (VPS), desde la arquitectura hasta producción.',
-      en: 'I design agentic workflows and AI MVPs on self-managed VPS infrastructure, from architecture to production.',
+      es: 'Agentes de voz, automatizaciones con n8n y MVPs de IA desplegados en Docker sobre VPS.',
+      en: 'Voice agents, n8n automations and AI MVPs deployed with Docker on VPS.',
     },
   },
   {
-    role: { es: 'Senior Frontend Engineer', en: 'Senior Frontend Engineer' },
-    org: 'Rapicredit',
+    period: { es: 'Feb 2023 — Abr 2025', en: 'Feb 2023 — Apr 2025' },
+    role: { es: 'Senior Frontend Engineer · Tech Lead', en: 'Senior Frontend Engineer · Tech Lead' },
+    org: { es: 'Rapicredit', en: 'Rapicredit' },
     text: {
-      es: 'Lideré el rebranding de toda la compañía. Premio de innovación por "Sessionless Payments".',
-      en: 'Led the company-wide rebranding. Innovation award for "Sessionless Payments".',
+      es: 'Modernicé el frontend de la plataforma principal en 4 semanas con un equipo de 4, sin caídas en producción. CI/CD en Azure DevOps y AWS. 2.º lugar en la feria de innovación con "Sessionless Payments".',
+      en: 'Modernized the flagship platform’s frontend in 4 weeks with a team of 4, zero production downtime. CI/CD on Azure DevOps and AWS. 2nd place at the innovation fair with "Sessionless Payments".',
     },
   },
   {
-    role: { es: 'Frontend Engineer', en: 'Frontend Engineer' },
-    org: 'Bancolombia · Emtelco · Capgemini',
+    period: { es: 'Oct 2018 — Ene 2023', en: 'Oct 2018 — Jan 2023' },
+    role: { es: 'Frontend / Software Engineer', en: 'Frontend / Software Engineer' },
+    org: { es: 'Klym · IAS Software · Capgemini · iGerencia', en: 'Klym · IAS Software · Capgemini · iGerencia' },
     text: {
-      es: 'Más de 5 años construyendo aplicaciones escalables para banca y grandes empresas.',
-      en: '5+ years building scalable applications for banking and enterprise clients.',
+      es: 'Aplicaciones para Bancolombia, Emtelco y fintechs. Lideré equipos de hasta 8 personas. En Capgemini, el monitoreo que implementé mejoró la estabilidad un 15%.',
+      en: 'Applications for Bancolombia, Emtelco and fintechs. Led teams of up to 8. At Capgemini, the monitoring I built improved stability by 15%.',
     },
   },
 ];
 
+export const education = [
+  { es: 'Ingeniería de Software — Politécnico Grancolombiano, 2021', en: 'Software Engineering — Politécnico Grancolombiano, 2021' },
+  { es: 'Tecnólogo en Análisis y Desarrollo de Sistemas — SENA, 2016', en: 'Systems Analysis & Development Technologist — SENA, 2016' },
+  { es: 'Scrum Foundation Professional Certificate — CertiProf, 2020', en: 'Scrum Foundation Professional Certificate — CertiProf, 2020' },
+  { es: 'Un año de inmersión en inglés en Australia', en: 'One year of English immersion in Australia' },
+];
+
 export const stack = [
-  { group: 'AI & Agents', items: ['Claude Code', 'Multi-agent orchestration', 'LLM pipelines', 'Prompt engineering', 'Whisper / ONNX'] },
-  { group: 'Automation', items: ['n8n', 'Node.js APIs', 'GitHub Actions', 'Docker'] },
-  { group: 'Voice & Comms', items: ['Vapi', 'ElevenLabs', 'Twilio', 'WhatsApp Cloud API'] },
-  { group: 'Product', items: ['TypeScript', 'React / Next.js', 'Angular', 'NestJS', 'AWS'] },
+  { group: { es: 'IA y LLMs', en: 'AI & LLMs' }, items: ['Anthropic Claude', 'OpenAI', 'Claude Code', 'Multi-agent', 'Prompt engineering', 'Semantic matching'] },
+  { group: { es: 'Voz', en: 'Voice' }, items: ['Vapi', 'ElevenLabs', 'Twilio', 'WhatsApp Cloud API', 'Whisper'] },
+  { group: { es: 'Backend y datos', en: 'Backend & data' }, items: ['TypeScript', 'NestJS', 'Node.js', 'MongoDB', 'PostgreSQL', 'BullMQ + Redis', 'n8n'] },
+  { group: { es: 'Infra', en: 'Infra' }, items: ['Docker', 'Azure DevOps', 'GitHub Actions', 'AWS', 'Railway', 'Cloudflare'] },
+  { group: { es: 'Producto', en: 'Product' }, items: ['React', 'Angular', 'Next.js', 'Tailwind'] },
 ];
