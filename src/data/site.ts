@@ -389,16 +389,16 @@ export const cases: CaseStudy[] = [
     role: { es: 'Autor', en: 'Author' },
     built: {
       es: [
-        'Salas con chat en tiempo real: "está escribiendo…", reacciones y canciones compartidas como tarjetas que se suman a la cola',
+        'Salas tipo Messenger: la música suena en un solo lugar y cada invitado pide, vota y chatea desde su celular; la canción más votada suena primero',
         'Radio automática: a partir de la canción que suena, trae más de lo mismo y la música nunca se detiene',
         'Explorar como YouTube Music: géneros, estados de ánimo, artistas principales y sus páginas',
-        '55 pruebas automáticas (Vitest + node:test), CI en GitHub Actions y Docker',
+        'Comparte canciones y salas por WhatsApp con vista previa; 95 pruebas automáticas y CI en GitHub Actions',
       ],
       en: [
-        'Rooms with real-time chat: typing indicator, reactions and shared songs as cards that go straight to the queue',
+        'Messenger-style rooms: music plays in one place while each guest requests, votes and chats from their phone; the most-voted song plays next',
         'Auto radio: from the song that’s playing, it brings more of the same so the music never stops',
         'Explore like YouTube Music: genres, moods, top artists and their pages',
-        '55 automated tests (Vitest + node:test), CI on GitHub Actions and Docker',
+        'Share songs and rooms on WhatsApp with link previews; 95 automated tests and CI on GitHub Actions',
       ],
     },
     metrics: [],
