@@ -166,7 +166,9 @@ const mail = (subject: string) => `mailto:${profile.email}?subject=${encodeURICo
           <ul class="chips mono">{p.tags.map((tag) => <li>{tag}</li>)}</ul>
           <div class="links">
             {p.apk && <a class="btn sm accent" href={p.apk} target="_blank" rel="noopener">{t.more.apk} ↓</a>}
-            {p.codeOnRequest && <a class="btn sm" href={mail(`${t.more.requestSubject} ${p.name}`)}>🔒 {t.more.requestCode}</a>}
+            {p.codeOnRequest && (
+              <a class="btn sm" href={mail(`${t.more.requestSubject} ${p.name}`)} data-contact data-subject={`${t.more.requestSubject} ${p.name}`}>🔒 {t.more.requestCode}</a>
+            )}
             {p.repo && <a class="btn sm" href={p.repo} target="_blank" rel="noopener">{t.more.code} ↗</a>}
           </div>
         </article>
@@ -228,7 +230,7 @@ const mail = (subject: string) => `mailto:${profile.email}?subject=${encodeURICo
       <p class="kicker mono">{t.contact.kicker}</p>
       <h2>{t.contact.title}</h2>
       <p class="lead">{t.contact.text}</p>
-      <a class="big-mail" href={`mailto:${profile.email}`}>{profile.email}</a>
+      <a class="big-mail" href={`mailto:${profile.email}`} data-contact data-subject={t.contact.subject}>{profile.email}</a>
       <div class="actions">
         <a class="btn light" href={profile.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
         <a class="btn light" href={profile.github} target="_blank" rel="noopener">GitHub ↗</a>
@@ -237,6 +239,21 @@ const mail = (subject: string) => `mailto:${profile.email}?subject=${encodeURICo
     </div>
   </section>
 </main>
+
+<dialog id="contact-dialog" class="contact-dialog" data-email={profile.email}>
+  <form method="dialog">
+    <p class="kicker mono">{t.dialog.kicker}</p>
+    <h2 id="cd-subject"></h2>
+    <p class="cd-text">{t.dialog.text}</p>
+    <div class="cd-actions">
+      <a class="btn ink" id="cd-gmail" target="_blank" rel="noopener">{t.dialog.gmail} ↗</a>
+      <a class="btn" id="cd-mailto">{t.dialog.app}</a>
+      <button type="button" class="btn" id="cd-copy" data-done={t.dialog.copied}>{t.dialog.copy}</button>
+    </div>
+    <p class="cd-mail mono">{profile.email}</p>
+    <button class="cd-close" aria-label={t.dialog.close}>×</button>
+  </form>
+</dialog>
 
 <footer class="wrap footer mono">
   <span>© {new Date().getFullYear()} {profile.name}</span>
@@ -251,5 +268,40 @@ const mail = (subject: string) => `mailto:${profile.email}?subject=${encodeURICo
     const tick = () => { el.textContent = `${fmt.format(new Date())} ${el.dataset.suffix ?? ''}`; };
     tick();
     setInterval(tick, 30000);
+  }
+
+  // Los enlaces mailto no hacen nada si el visitante no tiene una app de correo configurada
+  // (lo normal en Windows con Gmail web). Abrimos un diálogo con alternativas que siempre funcionan.
+  const dlg = document.getElementById('contact-dialog') as HTMLDialogElement | null;
+  if (dlg && typeof dlg.showModal === 'function') {
+    const email = dlg.dataset.email ?? '';
+    const gmail = dlg.querySelector<HTMLAnchorElement>('#cd-gmail')!;
+    const app = dlg.querySelector<HTMLAnchorElement>('#cd-mailto')!;
+    const copy = dlg.querySelector<HTMLButtonElement>('#cd-copy')!;
+    const title = dlg.querySelector<HTMLElement>('#cd-subject')!;
+    const copyLabel = copy.textContent ?? '';
+
+    document.querySelectorAll<HTMLAnchorElement>('[data-contact]').forEach((a) => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const subject = a.dataset.subject ?? '';
+        title.textContent = subject;
+        gmail.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent(subject)}`;
+        app.href = `mailto:${email}?subject=${encodeURIComponent(subject)}`;
+        copy.textContent = copyLabel;
+        dlg.showModal();
+      });
+    });
+
+    copy.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(email);
+        copy.textContent = copy.dataset.done ?? copyLabel;
+      } catch {
+        window.prompt('', email);
+      }
+    });
+
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
   }
 </script>
