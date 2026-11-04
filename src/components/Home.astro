@@ -93,7 +93,13 @@ const more = projects.filter((p) => !p.featured);
     <div class="grid-2 more">
       {more.map((p) => (
         <article class="card project" style={`--accent:${p.accent}`}>
-          <div class="visual sm-visual" aria-hidden="true"><span>{p.glyph}</span></div>
+          {p.image ? (
+            <a class="visual sm-visual shot" href={p.image} target="_blank" rel="noopener">
+              <img src={p.image} alt={p.imageAlt?.[lang] ?? p.name} loading="lazy" width="1280" height="720" />
+            </a>
+          ) : (
+            <div class="visual sm-visual" aria-hidden="true"><span>{p.glyph}</span></div>
+          )}
           <h3>{p.name}</h3>
           <p class="tagline">{p.tagline[lang]}</p>
           <p>{p.description[lang]}</p>

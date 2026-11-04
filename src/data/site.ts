@@ -163,7 +163,7 @@ export const projects: Project[] = [
     privateCode: true,
     accent: '#3fb6ff',
     glyph: '✚',
-    image: '/projects/pbm-resumen.png',
+    image: '/projects/pbm-resumen.webp',
     imageAlt: {
       es: 'Panel de autorizaciones del Design System de FarmaSalud PBM (datos de ejemplo)',
       en: 'FarmaSalud PBM Design System authorizations dashboard (sample data)',
@@ -319,7 +319,8 @@ export const projects: Project[] = [
       en: ['Bot AI for allies and enemies', 'Procedural map and Android export'],
     },
     tags: ['Godot 4', 'GDScript', 'Game AI', 'Multiplayer', 'Android'],
-    repo: 'https://github.com/JohanHdez/fallen-legends-3d',
+    image: '/projects/fallen-legends-3d.webp',
+    imageAlt: { es: 'Fallen Legends 3D: combate contra la horda en el bosque', en: 'Fallen Legends 3D: fighting the horde in the forest' },
     apk: 'https://drive.google.com/file/d/11vD-vsULm-V3ioa2qACETLnN7IefMEFf/view',
   },
   {
@@ -340,6 +341,8 @@ export const projects: Project[] = [
       en: ['Procedural dungeon generation', 'Exported to Android'],
     },
     tags: ['Godot 4', 'GDScript', '2D isometric', 'Android'],
+    image: '/projects/fallen-legends-2d.webp',
+    imageAlt: { es: 'Fallen Legends: mazmorra isométrica con enemigos y jefe', en: 'Fallen Legends: isometric dungeon with enemies and boss' },
     apk: 'https://drive.google.com/file/d/15DNWNpVLzrVBKJGhTV7UvVOtxdNjtxXF/view',
   },
   {
@@ -360,6 +363,8 @@ export const projects: Project[] = [
       en: ['Vanilla HTML, CSS and JS', 'Fully responsive'],
     },
     tags: ['HTML', 'CSS', 'JavaScript', 'Cliente'],
+    image: '/projects/nails.webp',
+    imageAlt: { es: 'Portada del sitio de Alejandra Ochoa Nails', en: 'Alejandra Ochoa Nails website hero' },
     repo: 'https://github.com/JohanHdez/nails',
   },
 ];
