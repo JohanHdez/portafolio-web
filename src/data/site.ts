@@ -389,20 +389,22 @@ export const cases: CaseStudy[] = [
     role: { es: 'Autor', en: 'Author' },
     built: {
       es: [
-        'El vinilo gira con la portada de la canción y el brazo baja al reproducir',
+        'Radio automática: a partir de la canción que suena, trae más de lo mismo y la música nunca se detiene',
+        'Panel "Porque escuchas…" con sugerencias para reproducir ya o sumar a la cola',
         'Playlist sincronizada con Socket.IO; cada invitado escucha en su dispositivo o en el del anfitrión',
         'Reconexión automática y búsqueda en YouTube sin API key; se despliega con Docker',
       ],
       en: [
-        'The record spins with the song cover and the tonearm drops on play',
+        'Auto radio: from the song that’s playing, it brings more of the same so the music never stops',
+        '"Because you’re listening to…" panel with suggestions to play now or queue',
         'Playlist synced with Socket.IO; each guest listens on their device or the host’s',
         'Automatic reconnection and YouTube search with no API key; ships with Docker',
       ],
     },
     metrics: [],
-    stack: ['Angular 21', 'Express 5', 'Socket.IO', 'Docker'],
+    stack: ['Angular 21', 'Signals', 'Express 5', 'Socket.IO', 'Vitest', 'Docker'],
     shots: [
-      { src: '/projects/vinyl-player.webp', url: 'localhost:3001', kind: 'browser', alt: { es: 'Vinyl Player: tocadiscos reproduciendo', en: 'Vinyl Player: turntable playing' } },
+      { src: '/projects/vinyl-player.webp', url: 'localhost:3001', kind: 'browser', alt: { es: 'Vinyl Player: tocadiscos, cola con canciones de la radio y sugerencias', en: 'Vinyl Player: turntable, queue with radio songs and suggestions' } },
     ],
     links: [{ label: 'code', href: 'https://github.com/JohanHdez/vinyl-player' }],
   },
