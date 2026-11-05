@@ -73,37 +73,6 @@ const access = (name: string, repo: string) => {
     ))}
   </section>
 
-  <!-- CÓMO TRABAJO -->
-  <section id="how" class="how">
-    <div class="wrap">
-      <p class="kicker mono">{t.how.kicker}</p>
-      <h2 class="section-title">{t.how.title}</h2>
-      <p class="section-lead">{t.how.text}</p>
-
-      <div class="team" aria-hidden="true">
-        <div class="human">
-          <span class="avatar">JH</span>
-          <div><strong>{t.how.me}</strong><small>{t.how.meRole}</small></div>
-        </div>
-        <div class="wire"></div>
-        <ul class="agents">
-          {agents.map((a, i) => <li class="mono"><span>{String(i + 1).padStart(2, '0')}</span>{a[lang]}</li>)}
-        </ul>
-      </div>
-
-      <ol class="steps">
-        {t.how.steps.map((s) => (
-          <li>
-            <span class="mono">{s.n}</span>
-            <h3>{s.t}</h3>
-            <p>{s.d}</p>
-          </li>
-        ))}
-      </ol>
-      <p class="footnote">{t.how.footnote}</p>
-    </div>
-  </section>
-
   <!-- CASOS -->
   <section id="work" class="wrap section">
     <p class="kicker mono">{t.work.kicker}</p>
@@ -191,6 +160,37 @@ const access = (name: string, repo: string) => {
     </div>
   </section>
 
+  <!-- CÓMO TRABAJO -->
+  <section id="how" class="how">
+    <div class="wrap">
+      <p class="kicker mono">{t.how.kicker}</p>
+      <h2 class="section-title">{t.how.title}</h2>
+      <p class="section-lead">{t.how.text}</p>
+
+      <div class="team" aria-hidden="true">
+        <div class="human">
+          <span class="avatar">JH</span>
+          <div><strong>{t.how.me}</strong><small>{t.how.meRole}</small></div>
+        </div>
+        <div class="wire"></div>
+        <ul class="agents">
+          {agents.map((a, i) => <li class="mono"><span>{String(i + 1).padStart(2, '0')}</span>{a[lang]}</li>)}
+        </ul>
+      </div>
+
+      <ol class="steps">
+        {t.how.steps.map((s) => (
+          <li>
+            <span class="mono">{s.n}</span>
+            <h3>{s.t}</h3>
+            <p>{s.d}</p>
+          </li>
+        ))}
+      </ol>
+      <p class="footnote">{t.how.footnote}</p>
+    </div>
+  </section>
+
   <!-- CLIENTES -->
   <section class="wrap section">
     <p class="kicker mono">{t.clients.kicker}</p>
@@ -258,7 +258,7 @@ const access = (name: string, repo: string) => {
 <dialog id="contact-dialog" class="contact-dialog" data-email={profile.email}>
   <form method="dialog">
     <p class="kicker mono">{t.dialog.kicker}</p>
-    <h2 id="cd-subject"></h2>
+    <h2 id="cd-subject">{t.contact.subject}</h2>
     <p class="cd-text">{t.dialog.text}</p>
     <div class="cd-actions">
       <a class="btn ink" id="cd-gmail" target="_blank" rel="noopener">{t.dialog.gmail} ↗</a>

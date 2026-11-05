@@ -35,7 +35,7 @@ export const ui = {
     numbers: [
       { value: '8+', label: 'años de ingeniería de software' },
       { value: '1.5+', label: 'años con LLMs en producción' },
-      { value: '17', label: 'países que cubre Kmaleon' },
+      { value: '8', label: 'productos publicados que puedes abrir' },
       { value: '6', label: 'agentes en mi equipo de desarrollo' },
     ],
     how: {
@@ -126,7 +126,7 @@ export const ui = {
     numbers: [
       { value: '8+', label: 'years of software engineering' },
       { value: '1.5+', label: 'years shipping LLMs to production' },
-      { value: '17', label: 'countries covered by Kmaleon' },
+      { value: '8', label: 'shipped products you can open' },
       { value: '6', label: 'agents on my dev team' },
     ],
     how: {
@@ -238,7 +238,7 @@ export const cases: CaseStudy[] = [
     name: 'Kmaleon',
     year: '2024 —',
     badge: { es: 'Mi startup · prelanzamiento', en: 'My startup · pre-launch' },
-    accent: '#3f8f5a',
+    accent: '#2f7a4c',
     title: {
       es: 'Búsqueda de empleo con IA, pensada para Latinoamérica',
       en: 'AI job search built for Latin America',
@@ -270,7 +270,6 @@ export const cases: CaseStudy[] = [
     stack: ['Anthropic Claude', 'NestJS', 'MongoDB Atlas', 'BullMQ + Redis', 'React', 'Railway', 'Cloudflare Pages'],
     shots: [
       { src: '/projects/kmaleon.webp', url: 'kmaleon.co', kind: 'browser', alt: { es: 'Portada de Kmaleon: búsqueda de empleo pensada para Latinoamérica', en: 'Kmaleon homepage: job search built for Latin America' } },
-      { src: '/projects/kmaleon-mobile.webp', kind: 'phone', alt: { es: 'Kmaleon en el celular', en: 'Kmaleon on mobile' } },
     ],
     links: [{ label: 'visit', href: 'https://kmaleon.co' }],
   },
