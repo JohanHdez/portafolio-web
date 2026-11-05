@@ -10,8 +10,16 @@ const { lang } = Astro.props;
 const t = ui[lang];
 const home = lang === 'es' ? '/' : '/en/';
 const otherHref = lang === 'es' ? '/en/' : '/';
-const linkText = { visit: t.work.visit, code: t.work.code, store: t.work.store };
-const mail = (subject: string) => `mailto:${profile.email}?subject=${encodeURIComponent(subject)}`;
+const linkText = { visit: t.work.visit, code: t.work.code, store: t.work.store, app: t.work.app };
+const mail = (subject: string, body = '') =>
+  `mailto:${profile.email}?subject=${encodeURIComponent(subject)}${body ? `&body=${encodeURIComponent(body)}` : ''}`;
+// Correo ya escrito para pedir acceso a un repo privado: proyecto, enlace y los datos que necesito.
+const access = (name: string, repo: string) => {
+  const r = t.request;
+  const subject = `${t.more.requestSubject} ${name}`;
+  const body = [r.greeting, '', `${r.want} ${name}.`, `${r.repo}: ${repo}`, '', r.fill, ...r.fields, '', r.thanks].join('\n');
+  return { href: mail(subject, body), subject, body };
+};
 ---
 <header class="nav">
   <div class="wrap nav-in">
@@ -145,6 +153,10 @@ const mail = (subject: string) => `mailto:${profile.email}?subject=${encodeURICo
             {c.links.map((l) => (
               <a class={`btn sm${l.label !== 'code' ? ' accent' : ''}`} href={l.href} target="_blank" rel="noopener">{linkText[l.label]} ↗</a>
             ))}
+            {c.requestAccess?.map((r) => {
+              const a = access(r.name, r.repo);
+              return <a class="btn sm" href={a.href} data-contact data-subject={a.subject} data-body={a.body}>🔒 {t.more.requestCode} · {r.name}</a>;
+            })}
             {c.privateCode && <span class="note mono">🔒 {t.work.privateCode}</span>}
           </div>
         </div>
@@ -165,10 +177,13 @@ const mail = (subject: string) => `mailto:${profile.email}?subject=${encodeURICo
           <p>{p.text[lang]}</p>
           <ul class="chips mono">{p.tags.map((tag) => <li>{tag}</li>)}</ul>
           <div class="links">
-            {p.apk && <a class="btn sm accent" href={p.apk} target="_blank" rel="noopener">{t.more.apk} ↓</a>}
-            {p.codeOnRequest && (
-              <a class="btn sm" href={mail(`${t.more.requestSubject} ${p.name}`)} data-contact data-subject={`${t.more.requestSubject} ${p.name}`}>🔒 {t.more.requestCode}</a>
-            )}
+            {p.play && <a class="btn sm accent" href={p.play} target="_blank" rel="noopener">▶ {t.more.play}</a>}
+            {p.site && <a class="btn sm accent" href={p.site} target="_blank" rel="noopener">{t.more.visit} ↗</a>}
+            {p.apk && <a class={`btn sm${p.play ? '' : ' accent'}`} href={p.apk} target="_blank" rel="noopener">{t.more.apk} ↓</a>}
+            {p.privateRepo && (() => {
+              const a = access(p.name, p.privateRepo);
+              return <a class="btn sm" href={a.href} data-contact data-subject={a.subject} data-body={a.body}>🔒 {t.more.requestCode}</a>;
+            })()}
             {p.repo && <a class="btn sm" href={p.repo} target="_blank" rel="noopener">{t.more.code} ↗</a>}
           </div>
         </article>
@@ -285,9 +300,11 @@ const mail = (subject: string) => `mailto:${profile.email}?subject=${encodeURICo
       a.addEventListener('click', (e) => {
         e.preventDefault();
         const subject = a.dataset.subject ?? '';
+        const body = a.dataset.body ?? '';
+        const b = body ? `&body=${encodeURIComponent(body)}` : '';
         title.textContent = subject;
-        gmail.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent(subject)}`;
-        app.href = `mailto:${email}?subject=${encodeURIComponent(subject)}`;
+        gmail.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent(subject)}${b}`;
+        app.href = `mailto:${email}?subject=${encodeURIComponent(subject)}${b}`;
         copy.textContent = copyLabel;
         dlg.showModal();
       });

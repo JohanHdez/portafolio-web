@@ -60,14 +60,25 @@ export const ui = {
       visit: 'Visitar',
       code: 'Código',
       store: 'Chrome Web Store',
+      app: 'Probar la app',
       privateCode: 'Código privado del cliente',
     },
     more: {
       title: 'También construí',
       apk: 'Descargar APK',
+      play: 'Jugar en el navegador',
+      visit: 'Visitar',
       requestCode: 'Pedir acceso al código',
       requestSubject: 'Solicitud de acceso al código de',
       code: 'Código',
+    },
+    request: {
+      greeting: 'Hola Johan,',
+      want: 'Me gustaría ver el código de',
+      repo: 'Repositorio',
+      fill: 'Mis datos (para darme acceso):',
+      fields: ['Nombre:', 'Empresa o proyecto:', 'Usuario de GitHub:', 'Para qué lo quiero ver:'],
+      thanks: '¡Gracias!',
     },
     clients: {
       kicker: 'Para clientes',
@@ -82,7 +93,7 @@ export const ui = {
     },
     dialog: {
       kicker: 'Escríbeme',
-      text: 'Elige cómo prefieres enviarlo. El asunto ya va escrito.',
+      text: 'Elige cómo prefieres enviarlo. El asunto y el mensaje ya van escritos.',
       gmail: 'Abrir en Gmail',
       app: 'App de correo',
       copy: 'Copiar correo',
@@ -140,14 +151,25 @@ export const ui = {
       visit: 'Visit',
       code: 'Code',
       store: 'Chrome Web Store',
+      app: 'Try the app',
       privateCode: 'Private client code',
     },
     more: {
       title: 'I also built',
       apk: 'Download APK',
+      play: 'Play in the browser',
+      visit: 'Visit',
       requestCode: 'Request code access',
       requestSubject: 'Code access request for',
       code: 'Code',
+    },
+    request: {
+      greeting: 'Hi Johan,',
+      want: "I'd like to see the code of",
+      repo: 'Repository',
+      fill: 'My details (so you can grant access):',
+      fields: ['Name:', 'Company or project:', 'GitHub username:', 'Why I want to see it:'],
+      thanks: 'Thanks!',
     },
     clients: {
       kicker: 'For clients',
@@ -162,7 +184,7 @@ export const ui = {
     },
     dialog: {
       kicker: 'Email me',
-      text: 'Pick how you want to send it. The subject is already filled in.',
+      text: 'Pick how you want to send it. The subject and message are already filled in.',
       gmail: 'Open in Gmail',
       app: 'Mail app',
       copy: 'Copy email',
@@ -203,8 +225,10 @@ export interface CaseStudy {
   metrics: { value: string; label: T }[];
   stack: string[];
   shots: Shot[];
-  links: { label: 'visit' | 'code' | 'store'; href: string }[];
+  links: { label: 'visit' | 'code' | 'store' | 'app'; href: string }[];
   privateCode?: boolean;
+  /** Repos privados: botón que abre un correo pidiendo acceso, con el nombre y el enlace del repo. */
+  requestAccess?: { name: string; repo: string }[];
   accent: string;
 }
 
@@ -330,8 +354,10 @@ export const cases: CaseStudy[] = [
     ],
     links: [
       { label: 'store', href: 'https://chromewebstore.google.com/detail/english-coach-%E2%80%94-transcrip/oghhgmcnchilddbnigfnklehimieimhm' },
+      { label: 'app', href: 'https://english-coach.up.railway.app' },
       { label: 'code', href: 'https://github.com/JohanHdez/english-coach' },
     ],
+    requestAccess: [{ name: 'English Coach (PWA)', repo: 'https://github.com/JohanHdez/English-coah-app' }],
   },
   {
     slug: 'chapa',
@@ -407,7 +433,10 @@ export const cases: CaseStudy[] = [
       { src: '/projects/vinyl-sala.webp', url: 'vinyl · sala', kind: 'browser', alt: { es: 'Sala de Vinyl Player: chat con una canción compartida, reacciones y la cola compartida', en: 'Vinyl Player room: chat with a shared song, reactions and the shared queue' } },
       { src: '/projects/vinyl-player.webp', url: 'vinyl · tocando', kind: 'browser', alt: { es: 'Vinyl Player: tocadiscos, cola con canciones de la radio y sugerencias', en: 'Vinyl Player: turntable, queue with radio songs and suggestions' } },
     ],
-    links: [{ label: 'code', href: 'https://github.com/JohanHdez/vinyl-player' }],
+    links: [
+      { label: 'visit', href: 'https://irontfit-music.up.railway.app' },
+      { label: 'code', href: 'https://github.com/JohanHdez/vinyl-player' },
+    ],
   },
 ];
 
@@ -418,7 +447,10 @@ export interface SmallProject {
   image: string;
   imageAlt: T;
   apk?: string;
-  codeOnRequest?: boolean;
+  play?: string;
+  site?: string;
+  /** Repo privado: el botón "Pedir acceso" manda un correo con el nombre y este enlace. */
+  privateRepo?: string;
   repo?: string;
 }
 
@@ -426,14 +458,15 @@ export const smallProjects: SmallProject[] = [
   {
     name: 'Fallen Legends 3D',
     text: {
-      es: 'ARPG en tercera persona hecho en Godot: modo Horda de 10 oleadas y combates de 1v1 a 4v4 contra bots, con modo en línea.',
-      en: 'Third-person ARPG built in Godot: a 10-wave Horde mode and 1v1 to 4v4 fights against bots, with online play.',
+      es: 'ARPG en tercera persona hecho en Godot: modo Horda de 10 oleadas y combates de 1v1 a 4v4 contra bots, con modo en línea. Se juega en el navegador, sin instalar nada.',
+      en: 'Third-person ARPG built in Godot: a 10-wave Horde mode and 1v1 to 4v4 fights against bots, with online play. It runs in the browser, nothing to install.',
     },
-    tags: ['Godot 4', 'Game AI', 'Android'],
+    tags: ['Godot 4', 'Game AI', 'WebAssembly', 'Android'],
     image: '/projects/fallen-legends-3d.webp',
     imageAlt: { es: 'Fallen Legends 3D: combate contra la horda en el bosque', en: 'Fallen Legends 3D: fighting the horde in the forest' },
+    play: 'https://fallen-legends-3d.up.railway.app',
     apk: 'https://drive.google.com/file/d/11vD-vsULm-V3ioa2qACETLnN7IefMEFf/view',
-    codeOnRequest: true,
+    privateRepo: 'https://github.com/JohanHdez/fallen-legends-3d',
   },
   {
     name: 'Fallen Legends',
@@ -445,7 +478,7 @@ export const smallProjects: SmallProject[] = [
     image: '/projects/fallen-legends-2d.webp',
     imageAlt: { es: 'Fallen Legends: mazmorra isométrica con enemigos', en: 'Fallen Legends: isometric dungeon with enemies' },
     apk: 'https://drive.google.com/file/d/15DNWNpVLzrVBKJGhTV7UvVOtxdNjtxXF/view',
-    codeOnRequest: true,
+    privateRepo: 'https://github.com/JohanHdez/arena-arpg',
   },
   {
     name: 'Alejandra Ochoa Nails',
@@ -456,6 +489,7 @@ export const smallProjects: SmallProject[] = [
     tags: ['HTML', 'CSS', 'JavaScript'],
     image: '/projects/nails.webp',
     imageAlt: { es: 'Portada del sitio de Alejandra Ochoa Nails', en: 'Alejandra Ochoa Nails website hero' },
+    site: 'https://johanhdez.github.io/nails/',
     repo: 'https://github.com/JohanHdez/nails',
   },
 ];
