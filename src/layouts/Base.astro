@@ -7,7 +7,7 @@ interface Props {
 }
 const { lang } = Astro.props;
 const t = ui[lang];
-const site = Astro.site ?? new URL('https://johanhdez.vercel.app');
+const site = Astro.site ?? new URL('https://johanhdez.up.railway.app');
 const esUrl = new URL('/', site).href;
 const enUrl = new URL('/en/', site).href;
 const canonical = lang === 'es' ? esUrl : enUrl;

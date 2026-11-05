@@ -28,10 +28,16 @@ Para **agregar un proyecto**, añade un objeto a `cases` (casos grandes) o a `sm
 los datos que hacen falta para dar acceso (nombre, empresa, usuario de GitHub y para qué lo quieren ver).
 La plantilla del mensaje está en `ui.*.request` de `src/data/site.ts`.
 
-## Despliegue (Vercel)
+## Despliegue (Railway)
 
-Vercel (equipo `johanhdezs-projects`, proyecto `portafolio-web`) está conectado a este repo: cada push a
-`main` publica el sitio solo. Detecta Astro (build `npm run build`, salida `dist`).
-Cuando tengas dominio propio, cámbialo en `site` de `astro.config.mjs` y en `public/robots.txt`.
+Publicado en **https://johanhdez.up.railway.app** (Railway, proyecto `portafolio`, servicio `web`).
+No está conectado a GitHub: un push no lo actualiza. Para publicar:
+
+```bash
+bash tools/deploy.sh   # npm run build + sube dist/ servido con Caddy (tools/railway/)
+```
+
+Necesita la CLI de Railway con sesión iniciada y la carpeta vinculada (`railway link`, una sola vez).
+Si algún día hay dominio propio, cámbialo en `site` de `astro.config.mjs` y en `public/robots.txt`.
 
 La versión anterior (Angular 13) sigue en la rama `main` del historial.

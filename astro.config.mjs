@@ -1,9 +1,9 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-// Cambia `site` por tu dominio final (p. ej. https://johanhernandez.dev) cuando lo tengas.
+// Publicado en Railway (tools/deploy.sh). Si algún día hay dominio propio, cámbialo aquí y en public/robots.txt.
 export default defineConfig({
-  site: 'https://johanhdez.vercel.app',
+  site: 'https://johanhdez.up.railway.app',
   i18n: {
     defaultLocale: 'es',
     locales: ['es', 'en'],

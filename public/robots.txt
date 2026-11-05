@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://johanhdez.vercel.app/sitemap-index.xml
+Sitemap: https://johanhdez.up.railway.app/sitemap-index.xml
