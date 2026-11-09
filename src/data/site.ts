@@ -35,7 +35,7 @@ export const ui = {
     numbers: [
       { value: '8+', label: 'años de ingeniería de software' },
       { value: '1.5+', label: 'años con LLMs en producción' },
-      { value: '8', label: 'productos publicados que puedes abrir' },
+      { value: '7', label: 'productos publicados que puedes abrir' },
       { value: '6', label: 'agentes en mi equipo de desarrollo' },
     ],
     how: {
@@ -61,6 +61,7 @@ export const ui = {
       code: 'Código',
       store: 'Chrome Web Store',
       app: 'Probar la app',
+      gallery: 'Más capturas',
       privateCode: 'Código privado del cliente',
     },
     more: {
@@ -126,7 +127,7 @@ export const ui = {
     numbers: [
       { value: '8+', label: 'years of software engineering' },
       { value: '1.5+', label: 'years shipping LLMs to production' },
-      { value: '8', label: 'shipped products you can open' },
+      { value: '7', label: 'shipped products you can open' },
       { value: '6', label: 'agents on my dev team' },
     ],
     how: {
@@ -152,6 +153,7 @@ export const ui = {
       code: 'Code',
       store: 'Chrome Web Store',
       app: 'Try the app',
+      gallery: 'More screenshots',
       privateCode: 'Private client code',
     },
     more: {
@@ -225,7 +227,9 @@ export interface CaseStudy {
   metrics: { value: string; label: T }[];
   stack: string[];
   shots: Shot[];
-  links: { label: 'visit' | 'code' | 'store' | 'app'; href: string }[];
+  /** Más capturas, en una tira debajo de las principales (se abren en grande). */
+  gallery?: Shot[];
+  links: { label: 'visit' | 'code' | 'store' | 'app' | 'play' | 'apk'; href: string }[];
   privateCode?: boolean;
   /** Repos privados: botón que abre un correo pidiendo acceso, con el nombre y el enlace del repo. */
   requestAccess?: { name: string; repo: string }[];
@@ -233,6 +237,108 @@ export interface CaseStudy {
 }
 
 export const cases: CaseStudy[] = [
+  {
+    slug: 'fallen-legends-3d',
+    name: 'Fallen Legends 3D',
+    year: '2026',
+    badge: { es: 'Se juega en el navegador y en Android', en: 'Playable in the browser and on Android' },
+    accent: '#b45309',
+    title: {
+      es: 'Un ARPG en 3D con bots que juegan como personas, que corre hasta en un celular',
+      en: 'A 3D action RPG with bots that play like people, running even on a phone',
+    },
+    summary: {
+      es: 'Mi juego de rol de acción en tercera persona, hecho en Godot. Eliges una de siete leyendas y peleas contra hordas de criaturas o contra equipos de bots, solo o con compañeros. Lo exporto a WebAssembly para jugarlo sin instalar nada y a APK para Android, y estoy construyendo el modo en línea con servidor propio.',
+      en: 'My third-person action RPG, built in Godot. You pick one of seven legends and fight hordes of creatures or teams of bots, alone or with teammates. I export it to WebAssembly so it plays with nothing to install, and to an APK for Android, and I am building an online mode with its own server.',
+    },
+    role: { es: 'Autor: diseño, código, IA de los bots y publicación', en: 'Author: design, code, bot AI and release' },
+    built: {
+      es: [
+        'Modo Horda: 10 oleadas de cinco especies y un jefe desde la oleada 5; si cae todo el equipo se acaba, y un compañero agachado a tu lado te levanta',
+        'Combates de 1v1 a 4v4 contra bots al mejor de 3 rondas, con un gas que va cerrando el mapa',
+        'Bots que se esconden en la hierba alta, esquivan trampas y se reaniman entre ellos; el balance lo mido con torneos entre bots y semillas fijas',
+        'Siete leyendas con 21 habilidades, ciclo de día y noche, controles táctiles y una calidad ligera para la web que en una Intel HD 620 pasó de 5 a 15 FPS',
+        'Puerta de calidad automática: pruebas puras, partidas de humo, sondas de partida y prueba de la sala en línea con servidor y clientes sin pantalla',
+      ],
+      en: [
+        'Horde mode: 10 waves of five species and a boss from wave 5; if the whole team falls it is over, and a teammate crouching next to you revives you',
+        '1v1 to 4v4 fights against bots, best of 3 rounds, with gas that closes in on the map',
+        'Bots that hide in tall grass, dodge traps and revive each other; I measure balance with bot tournaments and fixed seeds',
+        'Seven legends with 21 abilities, a day/night cycle, touch controls and a lite web quality that took an Intel HD 620 from 5 to 15 FPS',
+        'Automated quality gate: pure tests, smoke matches, match probes and an online-room test with a headless server and clients',
+      ],
+    },
+    metrics: [
+      { value: '7', label: { es: 'leyendas jugables', en: 'playable legends' } },
+      { value: '21', label: { es: 'habilidades', en: 'abilities' } },
+      { value: '10', label: { es: 'oleadas en el modo Horda', en: 'waves in Horde mode' } },
+    ],
+    stack: ['Godot 4', 'GDScript', 'Game AI', 'WebAssembly', 'Android', 'WebSockets', 'Railway'],
+    shots: [
+      { src: '/projects/fl3d-horda.webp', url: 'fallen-legends-3d · horda', kind: 'browser', alt: { es: 'Fallen Legends 3D: un equipo de cuatro leyendas contra la horda en el bosque, con el Tormentero lanzando rayos', en: 'Fallen Legends 3D: a team of four legends fighting the horde in the forest, with the Stormcaller casting lightning' } },
+      { src: '/projects/fl3d-4v4.webp', url: 'fallen-legends-3d · 4 contra 4', kind: 'browser', alt: { es: 'Fallen Legends 3D: ronda 2 de un 4 contra 4, el equipo azul avanza por el bosque', en: 'Fallen Legends 3D: round 2 of a 4 vs 4, the blue team pushes through the forest' } },
+    ],
+    gallery: [
+      { src: '/projects/fl3d-menu.webp', kind: 'browser', alt: { es: 'Menú de inicio: modos Horda y 1v1 a 4v4, tamaño del equipo y elección de leyenda', en: 'Start menu: Horde and 1v1 to 4v4 modes, team size and legend picker' } },
+      { src: '/projects/fallen-legends-3d.webp', kind: 'browser', alt: { es: 'Fallen Legends 3D: combate contra la horda en el bosque', en: 'Fallen Legends 3D: fighting the horde in the forest' } },
+    ],
+    links: [
+      { label: 'play', href: 'https://fallen-legends-3d.up.railway.app' },
+      { label: 'apk', href: 'https://drive.google.com/file/d/11vD-vsULm-V3ioa2qACETLnN7IefMEFf/view' },
+    ],
+    requestAccess: [{ name: 'Fallen Legends 3D', repo: 'https://github.com/JohanHdez/fallen-legends-3d' }],
+  },
+  {
+    slug: 'vinyl',
+    name: 'Vinyl Player',
+    year: '2026',
+    badge: { es: 'Sonó 4 horas seguidas en un gimnasio, sin fallas', en: 'Played 4 hours straight at a gym, no failures' },
+    accent: '#c2410c',
+    title: {
+      es: 'La música del gimnasio la eligen todos desde su celular',
+      en: 'Everyone at the gym picks the music from their phone',
+    },
+    summary: {
+      es: 'Un tocadiscos en el navegador con salas en tiempo real. La música suena en un solo parlante y cada persona entra con un QR, sin instalar nada: pide canciones, vota cuál sigue y conversa. La probé en un gimnasio real: sonó cuatro horas seguidas sin problemas y a la gente le gustó; con lo que pidieron ahí agregué co-anfitriones y salas que sobreviven a los reinicios.',
+      en: 'A turntable in the browser with real-time rooms. Music plays on a single speaker and everyone joins with a QR code, nothing to install: they request songs, vote on what plays next and chat. I tested it at a real gym: it played four hours straight with no issues and people loved it; from what they asked for there I added co-hosts and rooms that survive restarts.',
+    },
+    role: { es: 'Autor', en: 'Author' },
+    built: {
+      es: [
+        'Salas tipo Messenger: entran con QR o código, piden, votan y chatean; la canción más votada suena primero',
+        'Roles: el anfitrión nombra co-anfitriones que manejan la música desde su celular, le pasa el mando a otra persona o saca a alguien de la sala',
+        'Salas y chat que sobreviven a reinicios y despliegues (volumen en Railway), y vuelta automática si se cae la conexión',
+        'Sigue sonando con la pantalla apagada: controles en la pantalla de bloqueo y reanudación si el navegador la pausa',
+        'Radio automática para que la música nunca pare, explorar como YouTube Music y compartir por WhatsApp con vista previa',
+      ],
+      en: [
+        'Messenger-style rooms: people join by QR or code, request, vote and chat; the most-voted song plays next',
+        'Roles: the host names co-hosts who control the music from their phones, hands control to someone else, or removes people from the room',
+        'Rooms and chat that survive restarts and deploys (a Railway volume), with automatic rejoin when the connection drops',
+        'Keeps playing with the screen off: lock-screen controls and resume when the browser pauses it',
+        'Auto radio so the music never stops, YouTube Music-style explore and WhatsApp sharing with link previews',
+      ],
+    },
+    metrics: [
+      { value: '4 h', label: { es: 'seguidas en un gimnasio real', en: 'straight at a real gym' } },
+      { value: '120', label: { es: 'pruebas automáticas', en: 'automated tests' } },
+      { value: '0', label: { es: 'apps que instalar', en: 'apps to install' } },
+    ],
+    stack: ['Angular 21', 'Signals', 'Express 5', 'Socket.IO', 'Media Session API', 'Vitest', 'GitHub Actions', 'Docker'],
+    shots: [
+      { src: '/projects/vinyl-sala.webp', url: 'johan-hdez-musica · sala', kind: 'browser', alt: { es: 'Sala de Vinyl Player: chat con una canción compartida, reacciones y la cola compartida', en: 'Vinyl Player room: chat with a shared song, reactions and the shared queue' } },
+      { src: '/projects/vinyl-chat-phone.webp', kind: 'phone', alt: { es: 'Sala del gimnasio en el celular: chat con una canción pedida para el cardio y sus votos', en: 'Gym room on a phone: chat with a song requested for cardio and its votes' } },
+    ],
+    gallery: [
+      { src: '/projects/vinyl-personas-phone.webp', kind: 'phone', alt: { es: 'Participantes de la sala: Laura es co-host y el anfitrión puede quitarle el rol, pasarle el mando o sacarla', en: 'Room participants: Laura is a co-host and the host can remove the role, hand over control or remove her' } },
+      { src: '/projects/vinyl-cola-phone.webp', kind: 'phone', alt: { es: 'Cola de la sala ordenada por votos', en: 'Room queue sorted by votes' } },
+      { src: '/projects/vinyl-player.webp', kind: 'browser', alt: { es: 'Vinyl Player: tocadiscos, cola con canciones de la radio y sugerencias', en: 'Vinyl Player: turntable, queue with radio songs and suggestions' } },
+    ],
+    links: [
+      { label: 'visit', href: 'https://johan-hdez-musica.up.railway.app' },
+      { label: 'code', href: 'https://github.com/JohanHdez/vinyl-player' },
+    ],
+  },
   {
     slug: 'kmaleon',
     name: 'Kmaleon',
@@ -398,45 +504,6 @@ export const cases: CaseStudy[] = [
       { label: 'code', href: 'https://github.com/JohanHdez/chapamonedero' },
     ],
   },
-  {
-    slug: 'vinyl',
-    name: 'Vinyl Player',
-    year: '2026',
-    accent: '#c2410c',
-    title: {
-      es: 'Un tocadiscos en el navegador para escuchar música en grupo',
-      en: 'A turntable in the browser for listening to music together',
-    },
-    summary: {
-      es: 'Reproductor de YouTube con tocadiscos animado y salas tipo Messenger: la gente entra con un código o QR, conversa, comparte canciones y arma la cola entre todos en tiempo real.',
-      en: 'YouTube player with an animated turntable and Messenger-style rooms: people join with a code or QR, chat, share songs and build the queue together in real time.',
-    },
-    role: { es: 'Autor', en: 'Author' },
-    built: {
-      es: [
-        'Salas tipo Messenger: la música suena en un solo lugar y cada invitado pide, vota y chatea desde su celular; la canción más votada suena primero',
-        'Radio automática: a partir de la canción que suena, trae más de lo mismo y la música nunca se detiene',
-        'Explorar como YouTube Music: géneros, estados de ánimo, artistas principales y sus páginas',
-        'Comparte canciones y salas por WhatsApp con vista previa; 95 pruebas automáticas y CI en GitHub Actions',
-      ],
-      en: [
-        'Messenger-style rooms: music plays in one place while each guest requests, votes and chats from their phone; the most-voted song plays next',
-        'Auto radio: from the song that’s playing, it brings more of the same so the music never stops',
-        'Explore like YouTube Music: genres, moods, top artists and their pages',
-        'Share songs and rooms on WhatsApp with link previews; 95 automated tests and CI on GitHub Actions',
-      ],
-    },
-    metrics: [],
-    stack: ['Angular 21', 'Signals', 'Express 5', 'Socket.IO', 'Vitest', 'GitHub Actions', 'Docker'],
-    shots: [
-      { src: '/projects/vinyl-sala.webp', url: 'vinyl · sala', kind: 'browser', alt: { es: 'Sala de Vinyl Player: chat con una canción compartida, reacciones y la cola compartida', en: 'Vinyl Player room: chat with a shared song, reactions and the shared queue' } },
-      { src: '/projects/vinyl-player.webp', url: 'vinyl · tocando', kind: 'browser', alt: { es: 'Vinyl Player: tocadiscos, cola con canciones de la radio y sugerencias', en: 'Vinyl Player: turntable, queue with radio songs and suggestions' } },
-    ],
-    links: [
-      { label: 'visit', href: 'https://irontfit-music.up.railway.app' },
-      { label: 'code', href: 'https://github.com/JohanHdez/vinyl-player' },
-    ],
-  },
 ];
 
 export interface SmallProject {
@@ -455,19 +522,6 @@ export interface SmallProject {
 
 export const smallProjects: SmallProject[] = [
   {
-    name: 'Fallen Legends 3D',
-    text: {
-      es: 'ARPG en tercera persona hecho en Godot: modo Horda de 10 oleadas y combates de 1v1 a 4v4 contra bots, con modo en línea. Se juega en el navegador, sin instalar nada.',
-      en: 'Third-person ARPG built in Godot: a 10-wave Horde mode and 1v1 to 4v4 fights against bots, with online play. It runs in the browser, nothing to install.',
-    },
-    tags: ['Godot 4', 'Game AI', 'WebAssembly', 'Android'],
-    image: '/projects/fallen-legends-3d.webp',
-    imageAlt: { es: 'Fallen Legends 3D: combate contra la horda en el bosque', en: 'Fallen Legends 3D: fighting the horde in the forest' },
-    play: 'https://fallen-legends-3d.up.railway.app',
-    apk: 'https://drive.google.com/file/d/11vD-vsULm-V3ioa2qACETLnN7IefMEFf/view',
-    privateRepo: 'https://github.com/JohanHdez/fallen-legends-3d',
-  },
-  {
     name: 'Fallen Legends',
     text: {
       es: 'El original en 2D isométrico: mazmorras generadas, jefes y siete leyendas con habilidades propias.',
@@ -478,18 +532,6 @@ export const smallProjects: SmallProject[] = [
     imageAlt: { es: 'Fallen Legends: mazmorra isométrica con enemigos', en: 'Fallen Legends: isometric dungeon with enemies' },
     apk: 'https://drive.google.com/file/d/15DNWNpVLzrVBKJGhTV7UvVOtxdNjtxXF/view',
     privateRepo: 'https://github.com/JohanHdez/arena-arpg',
-  },
-  {
-    name: 'Alejandra Ochoa Nails',
-    text: {
-      es: 'Sitio para un estudio de uñas en Copacabana, Antioquia, con video que avanza con el scroll.',
-      en: 'Website for a nail studio in Copacabana, Antioquia, with scroll-driven video.',
-    },
-    tags: ['HTML', 'CSS', 'JavaScript'],
-    image: '/projects/nails.webp',
-    imageAlt: { es: 'Portada del sitio de Alejandra Ochoa Nails', en: 'Alejandra Ochoa Nails website hero' },
-    site: 'https://johanhdez.github.io/nails/',
-    repo: 'https://github.com/JohanHdez/nails',
   },
 ];
 

@@ -10,7 +10,7 @@ const { lang } = Astro.props;
 const t = ui[lang];
 const home = lang === 'es' ? '/' : '/en/';
 const otherHref = lang === 'es' ? '/en/' : '/';
-const linkText = { visit: t.work.visit, code: t.work.code, store: t.work.store, app: t.work.app };
+const linkText = { visit: `${t.work.visit} ↗`, code: `${t.work.code} ↗`, store: `${t.work.store} ↗`, app: `${t.work.app} ↗`, play: `▶ ${t.more.play}`, apk: `${t.more.apk} ↓` };
 const mail = (subject: string, body = '') =>
   `mailto:${profile.email}?subject=${encodeURIComponent(subject)}${body ? `&body=${encodeURIComponent(body)}` : ''}`;
 // Correo ya escrito para pedir acceso a un repo privado: proyecto, enlace y los datos que necesito.
@@ -80,6 +80,7 @@ const access = (name: string, repo: string) => {
 
     {cases.map((c, i) => (
       <article class={`case${i % 2 ? ' flip' : ''}`} style={`--accent:${c.accent}`} id={c.slug}>
+        <div class="case-media-col">
         <div class="case-media">
           {c.shots.map((s) =>
             s.kind === 'phone' ? (
@@ -93,6 +94,21 @@ const access = (name: string, repo: string) => {
               </figure>
             )
           )}
+        </div>
+        {c.gallery && (
+          <div class="gallery">
+            <p class="label mono">{t.work.gallery}</p>
+            <ul>
+              {c.gallery.map((g) => (
+                <li class={g.kind === 'phone' ? 'g-phone' : 'g-wide'}>
+                  <a href={g.src} target="_blank" rel="noopener" title={g.alt[lang]}>
+                    <img src={g.src} alt={g.alt[lang]} loading="lazy" width={g.kind === 'phone' ? 390 : 1280} height={g.kind === 'phone' ? 844 : 800} />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
         </div>
 
         <div class="case-body">
@@ -120,7 +136,7 @@ const access = (name: string, repo: string) => {
 
           <div class="links">
             {c.links.map((l) => (
-              <a class={`btn sm${l.label !== 'code' ? ' accent' : ''}`} href={l.href} target="_blank" rel="noopener">{linkText[l.label]} ↗</a>
+              <a class={`btn sm${l.label !== 'code' ? ' accent' : ''}`} href={l.href} target="_blank" rel="noopener">{linkText[l.label]}</a>
             ))}
             {c.requestAccess?.map((r) => {
               const a = access(r.name, r.repo);
