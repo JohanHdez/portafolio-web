@@ -540,14 +540,15 @@ export const smallProjects: SmallProject[] = [
   {
     name: 'Fallen Legends',
     text: {
-      es: 'El original en 2D isométrico: mazmorras generadas, jefes y siete leyendas con habilidades propias.',
-      en: 'The isometric 2D original: generated dungeons, bosses and seven legends with their own abilities.',
+      es: 'El original en 2D isométrico y multijugador: Horda zombi, mazmorras con jefes y arenas PvP, con tienda y progreso guardado en su servidor. Se juega en el navegador.',
+      en: 'The isometric, multiplayer 2D original: zombie Horde, dungeons with bosses and PvP arenas, with a shop and progress saved on its server. It plays in the browser.',
     },
-    tags: ['Godot 4', '2D isometric', 'Android'],
+    tags: ['Godot 4', '2D isometric', 'Multiplayer', 'WebAssembly', 'Android'],
     image: '/projects/fallen-legends-2d.webp',
     imageAlt: { es: 'Fallen Legends: mazmorra isométrica con enemigos', en: 'Fallen Legends: isometric dungeon with enemies' },
+    play: 'https://fallen-legends-2d.up.railway.app',
     apk: 'https://drive.google.com/file/d/15DNWNpVLzrVBKJGhTV7UvVOtxdNjtxXF/view',
-    privateRepo: 'https://github.com/JohanHdez/arena-arpg',
+    privateRepo: 'https://github.com/JohanHdez/Fallen-Legends',
   },
 ];
 
