@@ -292,15 +292,15 @@ export const cases: CaseStudy[] = [
     slug: 'vinyl',
     name: 'Vinyl Player',
     year: '2026',
-    badge: { es: 'Sonó 4 horas seguidas en un gimnasio, sin fallas', en: 'Played 4 hours straight at a gym, no failures' },
+    badge: { es: 'Lleva una semana funcionando en un gimnasio', en: 'Running at a gym for a week now' },
     accent: '#c2410c',
     title: {
       es: 'La música del gimnasio la eligen todos desde su celular',
       en: 'Everyone at the gym picks the music from their phone',
     },
     summary: {
-      es: 'Un tocadiscos en el navegador con salas en tiempo real. La música suena en un solo parlante y cada persona entra con un QR, sin instalar nada: pide canciones, vota cuál sigue y conversa. La probé en un gimnasio real: sonó cuatro horas seguidas sin problemas y a la gente le gustó; con lo que pidieron ahí agregué co-anfitriones y salas que sobreviven a los reinicios.',
-      en: 'A turntable in the browser with real-time rooms. Music plays on a single speaker and everyone joins with a QR code, nothing to install: they request songs, vote on what plays next and chat. I tested it at a real gym: it played four hours straight with no issues and people loved it; from what they asked for there I added co-hosts and rooms that survive restarts.',
+      es: 'Un tocadiscos en el navegador con salas en tiempo real. La música suena en un solo parlante y cada persona entra con un QR, sin instalar nada: pide canciones, vota cuál sigue y conversa. Lleva una semana funcionando en un gimnasio real: el primer día sonó cuatro horas seguidas sin problemas y a la gente le gustó; con lo que pidieron ahí agregué co-anfitriones y salas que sobreviven a los reinicios.',
+      en: 'A turntable in the browser with real-time rooms. Music plays on a single speaker and everyone joins with a QR code, nothing to install: they request songs, vote on what plays next and chat. It has been running at a real gym for a week: on day one it played four hours straight with no issues and people loved it; from what they asked for there I added co-hosts and rooms that survive restarts.',
     },
     role: { es: 'Autor', en: 'Author' },
     built: {
@@ -320,7 +320,7 @@ export const cases: CaseStudy[] = [
       ],
     },
     metrics: [
-      { value: '4 h', label: { es: 'seguidas en un gimnasio real', en: 'straight at a real gym' } },
+      { value: '7', label: { es: 'días funcionando en un gimnasio real', en: 'days running at a real gym' } },
       { value: '120', label: { es: 'pruebas automáticas', en: 'automated tests' } },
       { value: '0', label: { es: 'apps que instalar', en: 'apps to install' } },
     ],
