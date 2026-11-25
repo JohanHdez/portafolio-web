@@ -1,0 +1,32 @@
+[
+ {
+  "mode": "redesign",
+  "depth": "full",
+  "scope": "site",
+  "shape": "kept order, recomposed",
+  "theme": "brand",
+  "axes": "light/roman-serif/chromatic-green",
+  "hero": "Stage",
+  "nav": "edge-aligned",
+  "footer": "colophon",
+  "imagery": "screenshots of the user products",
+  "sections": [
+   "hero",
+   "figures",
+   "index+cases split",
+   "showcase",
+   "dark band diagram+steps",
+   "rows",
+   "timeline",
+   "closing band"
+  ],
+  "signature": "Medellin clock under the actions; Kmaleon live on a phone",
+  "waived": [
+   "8",
+   "47b",
+   "59"
+  ],
+  "prompt": "portfolio of an AI engineer who ships products; job hire",
+  "date": "2026-11-23"
+ }
+]

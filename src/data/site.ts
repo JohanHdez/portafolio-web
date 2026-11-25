@@ -4,7 +4,7 @@ type TL = { es: string[]; en: string[] };
 
 export const profile = {
   name: 'Johan Hernández',
-  email: 'jshernandezo97@gmail.com',
+  email: 'hernandezprogramer@gmail.com',
   github: 'https://github.com/JohanHdez',
   linkedin: 'https://www.linkedin.com/in/johan-ai-solutions-architect',
   kmaleon: 'https://kmaleon.co',
@@ -14,7 +14,7 @@ export const profile = {
 
 export const ui = {
   es: {
-    metaTitle: 'Johan Hernández — AI Engineer & Solutions Architect',
+    metaTitle: 'Johan Hernández | AI Engineer & Solutions Architect',
     metaDescription:
       'AI Engineer en Medellín. Llevo sistemas de IA del prompt a producción: pipelines LLM, agentes de voz y sistemas multi-agente. Fundador de Kmaleon.',
     nav: { work: 'Casos', how: 'Cómo trabajo', experience: 'Trayectoria', contact: 'Contacto', cv: 'CV' },
@@ -34,7 +34,7 @@ export const ui = {
     },
     numbers: [
       { value: '8+', label: 'años de ingeniería de software' },
-      { value: '1.5+', label: 'años con LLMs en producción' },
+      { value: '2', label: 'años con LLMs en producción' },
       { value: '7', label: 'productos publicados que puedes abrir' },
       { value: '6', label: 'agentes en mi equipo de desarrollo' },
     ],
@@ -98,7 +98,7 @@ export const ui = {
       gmail: 'Abrir en Gmail',
       app: 'App de correo',
       copy: 'Copiar correo',
-      copied: '¡Copiado!',
+      copied: 'Copiado',
       close: 'Cerrar',
     },
     footer: 'Diseñado y construido en Medellín.',
@@ -106,7 +106,7 @@ export const ui = {
     localTime: 'en Medellín',
   },
   en: {
-    metaTitle: 'Johan Hernández — AI Engineer & Solutions Architect',
+    metaTitle: 'Johan Hernández | AI Engineer & Solutions Architect',
     metaDescription:
       'AI Engineer based in Medellín. I take AI systems from prompt to production: LLM pipelines, voice agents and multi-agent systems. Founder of Kmaleon.',
     nav: { work: 'Work', how: 'How I work', experience: 'Experience', contact: 'Contact', cv: 'CV' },
@@ -126,7 +126,7 @@ export const ui = {
     },
     numbers: [
       { value: '8+', label: 'years of software engineering' },
-      { value: '1.5+', label: 'years shipping LLMs to production' },
+      { value: '2', label: 'years shipping LLMs to production' },
       { value: '7', label: 'shipped products you can open' },
       { value: '6', label: 'agents on my dev team' },
     ],
@@ -190,7 +190,7 @@ export const ui = {
       gmail: 'Open in Gmail',
       app: 'Mail app',
       copy: 'Copy email',
-      copied: 'Copied!',
+      copied: 'Copied',
       close: 'Close',
     },
     footer: 'Designed and built in Medellín.',
@@ -342,8 +342,8 @@ export const cases: CaseStudy[] = [
   {
     slug: 'kmaleon',
     name: 'Kmaleon',
-    year: '2024 —',
-    badge: { es: 'Mi startup · prelanzamiento', en: 'My startup · pre-launch' },
+    year: '2024',
+    badge: { es: 'Mi startup, en prelanzamiento', en: 'My startup, pre-launch' },
     accent: '#2f7a4c',
     title: {
       es: 'Búsqueda de empleo con IA, pensada para Latinoamérica',
@@ -440,7 +440,7 @@ export const cases: CaseStudy[] = [
     slug: 'english-coach',
     name: 'English Coach',
     year: '2026',
-    badge: { es: 'En la Chrome Web Store · 5.0 ★', en: 'On the Chrome Web Store · 5.0 ★' },
+    badge: { es: 'En la Chrome Web Store, 5.0 ★', en: 'On the Chrome Web Store, 5.0 ★' },
     accent: '#5b5bd6',
     title: {
       es: 'Un coach de inglés que escucha tus reuniones, sin mandar tu audio a nadie',
@@ -538,6 +538,17 @@ export interface SmallProject {
 
 export const smallProjects: SmallProject[] = [
   {
+    name: 'Fauna Brava',
+    text: {
+      es: 'Artillería con una familia colombiana y sus mascotas, cada uno con su ventaja: el Gordo casi no se mueve, el Abuelo dispara sin que le afecte el viento y el gato tiene siete vidas. Hasta 4 en línea o contra bots, por turnos o todos a la vez, con terreno que se destruye, gancho, bomba nuclear y láser. Se juega en el navegador, también en el celular.',
+      en: 'An artillery game with a Colombian family and their pets, each with an edge: the Big Guy barely budges, Grandpa’s shots ignore the wind and the cat has seven lives. Up to 4 online or against bots, turn-based or all at once, with destructible terrain, a grappling hook, a nuke and a laser. It plays in the browser, on phones too.',
+    },
+    tags: ['Node.js', 'WebSockets', 'Canvas', 'Multiplayer', 'Game AI'],
+    image: '/projects/fauna-brava.webp',
+    imageAlt: { es: 'Fauna Brava: partida contra tres bots sobre colinas con palmas de cera, islas flotantes y una casita, con la bazuca, la granada, la bomba nuclear, el láser y el gancho', en: 'Fauna Brava: a match against three bots over hills with wax palms, floating islands and a small house, with the bazooka, grenade, nuke, laser and hook' },
+    play: 'https://fauna-brava-production.up.railway.app',
+  },
+  {
     name: 'Fallen Legends',
     text: {
       es: 'El original en 2D isométrico y multijugador: Horda zombi, mazmorras con jefes y arenas PvP, con tienda y progreso guardado en su servidor. Se juega en el navegador.',
@@ -584,7 +595,7 @@ export const clientWork = [
 
 export const experience = [
   {
-    period: { es: 'May 2024 — hoy', en: 'May 2024 — now' },
+    period: { es: 'May 2024 a hoy', en: 'May 2024 to now' },
     role: { es: 'AI Engineer & Fundador', en: 'AI Engineer & Founder' },
     org: { es: 'Kmaleon', en: 'Kmaleon' },
     text: {
@@ -593,16 +604,16 @@ export const experience = [
     },
   },
   {
-    period: { es: 'May — Nov 2026', en: 'May — Nov 2026' },
+    period: { es: 'May a Nov 2026', en: 'May to Nov 2026' },
     role: { es: 'AI Architect & Full-stack Engineer', en: 'AI Architect & Full-stack Engineer' },
-    org: { es: 'ARS Primera · FarmaSalud PBM', en: 'ARS Primera · FarmaSalud PBM' },
+    org: { es: 'ARS Primera, FarmaSalud PBM', en: 'ARS Primera, FarmaSalud PBM' },
     text: {
       es: 'Arquitectura agéntica y orquestación de cuatro repositorios. 4 proyectos de farmacias entregados y en producción.',
       en: 'Agentic architecture and orchestration of four repositories. 4 pharmacy projects delivered and in production.',
     },
   },
   {
-    period: { es: 'May 2024 — hoy', en: 'May 2024 — now' },
+    period: { es: 'May 2024 a hoy', en: 'May 2024 to now' },
     role: { es: 'AI Solutions Architect', en: 'AI Solutions Architect' },
     org: { es: 'Clientes directos', en: 'Direct clients' },
     text: {
@@ -611,8 +622,8 @@ export const experience = [
     },
   },
   {
-    period: { es: 'Feb 2023 — Abr 2025', en: 'Feb 2023 — Apr 2025' },
-    role: { es: 'Senior Frontend Engineer · Tech Lead', en: 'Senior Frontend Engineer · Tech Lead' },
+    period: { es: 'Feb 2023 a Abr 2025', en: 'Feb 2023 to Apr 2025' },
+    role: { es: 'Senior Frontend Engineer y Tech Lead', en: 'Senior Frontend Engineer and Tech Lead' },
     org: { es: 'Rapicredit', en: 'Rapicredit' },
     text: {
       es: 'Modernicé el frontend de la plataforma principal en 4 semanas con un equipo de 4, sin caídas en producción. CI/CD en Azure DevOps y AWS. 2.º lugar en la feria de innovación con "Sessionless Payments".',
@@ -620,9 +631,9 @@ export const experience = [
     },
   },
   {
-    period: { es: 'Oct 2018 — Ene 2023', en: 'Oct 2018 — Jan 2023' },
+    period: { es: 'Oct 2018 a Ene 2023', en: 'Oct 2018 to Jan 2023' },
     role: { es: 'Frontend / Software Engineer', en: 'Frontend / Software Engineer' },
-    org: { es: 'Klym · IAS Software · Capgemini · iGerencia', en: 'Klym · IAS Software · Capgemini · iGerencia' },
+    org: { es: 'Klym, IAS Software, Capgemini, iGerencia', en: 'Klym, IAS Software, Capgemini, iGerencia' },
     text: {
       es: 'Aplicaciones para Bancolombia, Emtelco y fintechs. Lideré equipos de hasta 8 personas. En Capgemini, el monitoreo que implementé mejoró la estabilidad un 15%.',
       en: 'Applications for Bancolombia, Emtelco and fintechs. Led teams of up to 8. At Capgemini, the monitoring I built improved stability by 15%.',
@@ -631,9 +642,9 @@ export const experience = [
 ];
 
 export const education = [
-  { es: 'Ingeniería de Software — Politécnico Grancolombiano, 2021', en: 'Software Engineering — Politécnico Grancolombiano, 2021' },
-  { es: 'Tecnólogo en Análisis y Desarrollo de Sistemas — SENA, 2016', en: 'Systems Analysis & Development Technologist — SENA, 2016' },
-  { es: 'Scrum Foundation Professional Certificate — CertiProf, 2020', en: 'Scrum Foundation Professional Certificate — CertiProf, 2020' },
+  { es: 'Ingeniería de Software, Politécnico Grancolombiano, 2021', en: 'Software Engineering, Politécnico Grancolombiano, 2021' },
+  { es: 'Tecnólogo en Análisis y Desarrollo de Sistemas, SENA, 2016', en: 'Systems Analysis & Development Technologist, SENA, 2016' },
+  { es: 'Scrum Foundation Professional Certificate, CertiProf, 2020', en: 'Scrum Foundation Professional Certificate, CertiProf, 2020' },
   { es: 'Un año de inmersión en inglés en Australia', en: 'One year of English immersion in Australia' },
 ];
 

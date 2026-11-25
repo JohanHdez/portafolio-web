@@ -2,6 +2,7 @@
 import {
   profile, ui, agents, cases, smallProjects, clientWork, experience, education, stack, type Lang,
 } from '../data/site';
+import Icon, { type IconName } from './Icon.astro';
 
 interface Props {
   lang: Lang;
@@ -10,7 +11,15 @@ const { lang } = Astro.props;
 const t = ui[lang];
 const home = lang === 'es' ? '/' : '/en/';
 const otherHref = lang === 'es' ? '/en/' : '/';
-const linkText = { visit: `${t.work.visit} ↗`, code: `${t.work.code} ↗`, store: `${t.work.store} ↗`, app: `${t.work.app} ↗`, play: `▶ ${t.more.play}`, apk: `${t.more.apk} ↓` };
+// Texto e icono de cada tipo de enlace de un caso (el icono va aparte, nunca pegado al texto).
+const linkText: Record<string, { text: string; icon: IconName }> = {
+  visit: { text: t.work.visit, icon: 'external' },
+  code: { text: t.work.code, icon: 'external' },
+  store: { text: t.work.store, icon: 'external' },
+  app: { text: t.work.app, icon: 'external' },
+  play: { text: t.more.play, icon: 'play' },
+  apk: { text: t.more.apk, icon: 'download' },
+};
 const mail = (subject: string, body = '') =>
   `mailto:${profile.email}?subject=${encodeURIComponent(subject)}${body ? `&body=${encodeURIComponent(body)}` : ''}`;
 // Correo ya escrito para pedir acceso a un repo privado: proyecto, enlace y los datos que necesito.
@@ -20,156 +29,191 @@ const access = (name: string, repo: string) => {
   const body = [r.greeting, '', `${r.want} ${name}.`, `${r.repo}: ${repo}`, '', r.fill, ...r.fields, '', r.thanks].join('\n');
   return { href: mail(subject, body), subject, body };
 };
+// En el botón basta "Pedir acceso al código"; si el repo no es el del caso, se añade lo que lo distingue: "(PWA)".
+const accessLabel = (repoName: string, caseName: string) => {
+  const extra = repoName.replace(caseName, '').trim();
+  return extra ? `${t.more.requestCode} ${extra}` : t.more.requestCode;
+};
+const shotSize = (kind?: string) =>
+  kind === 'phone' ? { w: 390, h: 844 } : kind === 'panel' ? { w: 420, h: 860 } : { w: 1440, h: 900 };
 ---
 <header class="nav">
-  <div class="wrap nav-in">
-    <a href={home} class="mark" aria-label={profile.name}>Johan Hernández<span>.</span></a>
+  <div class="container nav-in">
+    <a href={home} class="mark" aria-label={profile.name}>Johan Hernández<span aria-hidden="true">.</span></a>
     <nav aria-label="Main">
-      <a href="#work">{t.nav.work}</a>
-      <a href="#how">{t.nav.how}</a>
-      <a href="#experience">{t.nav.experience}</a>
+      <a href="#work" class="hide-sm">{t.nav.work}</a>
+      <a href="#how" class="hide-sm">{t.nav.how}</a>
+      <a href="#experience" class="hide-sm">{t.nav.experience}</a>
       <a href="#contact">{t.nav.contact}</a>
-      <a href={otherHref} class="pill" hreflang={lang === 'es' ? 'en' : 'es'}>{t.langSwitch}</a>
+      <a href={otherHref} class="lang" hreflang={lang === 'es' ? 'en' : 'es'}>{t.langSwitch}</a>
     </nav>
   </div>
 </header>
 
 <main>
-  <!-- HERO -->
-  <section class="hero wrap">
-    <div class="hero-text">
-      <p class="meta mono">
-        <span class="dot" aria-hidden="true"></span>
-        {profile.location} · <time id="clock" data-suffix={t.localTime}>—</time> · {t.hero.status}
-      </p>
-      <p class="hello">{t.hero.hello} <strong>{profile.name}</strong>.</p>
-      <h1>
-        <span>{t.hero.line1}</span>
-        <span>{t.hero.line2}</span>
-        <span><em class="mark-hl">{t.hero.line3}</em></span>
-      </h1>
-      <p class="lead">{t.hero.lead}</p>
-      <div class="actions">
-        <a class="btn ink" href="#work">{t.hero.ctaWork} ↓</a>
-        <a class="btn" href={profile.cv} download>{t.hero.ctaCv}</a>
+  <!-- HERO: el titular a la izquierda, lo que estoy construyendo hoy a la derecha -->
+  <section class="hero">
+    <div class="container hero-in">
+      <div class="hero-text">
+        <h1>
+          <span>{t.hero.line1}</span>
+          <span>{t.hero.line2}</span>
+          <span>{t.hero.line3}</span>
+        </h1>
+        <p class="lead">{t.hero.lead}</p>
+        <div class="actions">
+          <a class="btn primary" href="#work">{t.hero.ctaWork}<Icon name="down" /></a>
+          <a class="btn" href={profile.cv} download>{t.hero.ctaCv}<Icon name="download" /></a>
+        </div>
+        <p class="status">
+          <span>{profile.location}</span>
+          <time id="clock" data-suffix={t.localTime}></time>
+          <span>{t.hero.status}</span>
+        </p>
       </div>
+
+      <aside class="now" aria-label={t.hero.nowLabel}>
+        <div class="now-text">
+          <h2>{t.hero.nowTitle}</h2>
+          <p>{t.hero.nowText}</p>
+          <a href={profile.kmaleon} target="_blank" rel="noopener" class="now-link">{t.hero.nowLink}<Icon name="external" /></a>
+        </div>
+        <img src="/projects/kmaleon-mobile.webp" alt="" width="390" height="844" class="now-phone" fetchpriority="high" />
+      </aside>
     </div>
-
-    <aside class="now" aria-label={t.hero.nowLabel}>
-      <p class="now-label mono">● {t.hero.nowLabel}</p>
-      <h2>{t.hero.nowTitle}</h2>
-      <p>{t.hero.nowText}</p>
-      <a href={profile.kmaleon} target="_blank" rel="noopener" class="now-link">{t.hero.nowLink} ↗</a>
-      <img src="/projects/kmaleon-mobile.webp" alt="" width="390" height="844" class="now-phone" />
-    </aside>
   </section>
 
-  <section class="numbers wrap" aria-label="Datos">
-    {t.numbers.map((n) => (
-      <div>
-        <strong>{n.value}</strong>
-        <span>{n.label}</span>
+  <section class="numbers" aria-label={lang === 'es' ? 'Datos' : 'Facts'}>
+    <dl class="container numbers-in">
+      {t.numbers.map((n) => (
+        <div>
+          <dt class="figure">{n.value}</dt>
+          <dd>{n.label}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  <!-- CASOS: primero el índice, luego cada caso -->
+  <section id="work" class="work" aria-label={t.work.kicker}>
+    <div class="container">
+      <div class="work-head">
+        <h2>{t.work.title}</h2>
+        <ol class="index">
+          {cases.map((c) => (
+            <li>
+              <a href={`#${c.slug}`}>
+                <span class="index-name">{c.name}</span>
+                <span class="index-badge">{c.badge?.[lang]}</span>
+                <span class="index-year figure">{c.year}</span>
+              </a>
+            </li>
+          ))}
+        </ol>
       </div>
-    ))}
-  </section>
 
-  <!-- CASOS -->
-  <section id="work" class="wrap section">
-    <p class="kicker mono">{t.work.kicker}</p>
-    <h2 class="section-title">{t.work.title}</h2>
-
-    {cases.map((c, i) => (
-      <article class={`case${i % 2 ? ' flip' : ''}`} style={`--accent:${c.accent}`} id={c.slug}>
-        <div class="case-media-col">
-        <div class="case-media">
-          {c.shots.map((s) =>
-            s.kind === 'phone' ? (
-              <figure class="phone"><img src={s.src} alt={s.alt[lang]} loading="lazy" width="390" height="844" /></figure>
-            ) : s.kind === 'panel' ? (
-              <figure class="panel"><img src={s.src} alt={s.alt[lang]} loading="lazy" width="420" height="860" /></figure>
-            ) : (
-              <figure class="browser">
-                <div class="bar"><i></i><i></i><i></i><span class="mono">{s.url}</span></div>
-                <img src={s.src} alt={s.alt[lang]} loading="lazy" width="1440" height="900" />
+      {cases.map((c) => {
+        const [main, ...rest] = c.shots;
+        const mainSize = shotSize(main.kind);
+        return (
+          <article class="case" id={c.slug}>
+            <div class="case-media">
+              <figure class={`shot shot-main is-${main.kind ?? 'browser'}`} data-kind="product">
+                <img src={main.src} alt={main.alt[lang]} loading="lazy" width={mainSize.w} height={mainSize.h} />
               </figure>
-            )
-          )}
-        </div>
-        {c.gallery && (
-          <div class="gallery">
-            <p class="label mono">{t.work.gallery}</p>
-            <ul>
-              {c.gallery.map((g) => (
-                <li class={g.kind === 'phone' ? 'g-phone' : 'g-wide'}>
-                  <a href={g.src} target="_blank" rel="noopener" title={g.alt[lang]}>
-                    <img src={g.src} alt={g.alt[lang]} loading="lazy" width={g.kind === 'phone' ? 390 : 1280} height={g.kind === 'phone' ? 844 : 800} />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        </div>
+              {(rest.length > 0 || c.gallery) && (
+                <figure class="rail-wrap">
+                  <ul class="rail">
+                    {rest.map((s) => {
+                      const sz = shotSize(s.kind);
+                      return (
+                        <li class={`shot is-${s.kind ?? 'browser'}`} data-kind="product">
+                          <img src={s.src} alt={s.alt[lang]} loading="lazy" width={sz.w} height={sz.h} />
+                        </li>
+                      );
+                    })}
+                    {c.gallery?.map((g) => (
+                      <li class={`shot is-${g.kind ?? 'browser'}`} data-kind="product">
+                        <a href={g.src} target="_blank" rel="noopener" title={g.alt[lang]}>
+                          <img src={g.src} alt={g.alt[lang]} loading="lazy" width={g.kind === 'phone' ? 390 : 1280} height={g.kind === 'phone' ? 844 : 800} />
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                  {c.gallery && <figcaption>{t.work.gallery}</figcaption>}
+                </figure>
+              )}
+            </div>
 
-        <div class="case-body">
-          <p class="case-head mono">
-            <span class="num">{String(i + 1).padStart(2, '0')}</span>
-            <span>{c.name}</span>
-            <span class="year">{c.year}</span>
-          </p>
-          {c.badge && <p class="badge mono">{c.badge[lang]}</p>}
-          <h3>{c.title[lang]}</h3>
-          <p class="summary">{c.summary[lang]}</p>
+            <div class="case-body">
+              <h3>{c.name}</h3>
+              <p class="case-lead">{c.title[lang]}</p>
+              <p class="case-status">
+                {c.badge && <span>{c.badge[lang]}</span>}
+                <span class="figure">{c.year}</span>
+              </p>
+              <p class="summary">{c.summary[lang]}</p>
 
-          <p class="label mono">{t.work.role}: <span>{c.role[lang]}</span></p>
-          <ul class="built">{c.built[lang].map((b) => <li>{b}</li>)}</ul>
+              <dl class="role">
+                <dt>{t.work.role}</dt>
+                <dd>{c.role[lang]}</dd>
+              </dl>
 
-          {c.metrics.length > 0 && (
-            <dl class="metrics">
-              {c.metrics.map((m) => (
-                <div><dt>{m.value}</dt><dd>{m.label[lang]}</dd></div>
-              ))}
-            </dl>
-          )}
+              {c.metrics.length > 0 && (
+                <dl class="metrics">
+                  {c.metrics.map((m) => (
+                    <div><dt class="figure">{m.value}</dt><dd>{m.label[lang]}</dd></div>
+                  ))}
+                </dl>
+              )}
 
-          <ul class="chips mono">{c.stack.map((s) => <li>{s}</li>)}</ul>
+              <details class="built">
+                <summary>{t.work.built}</summary>
+                <ul>{c.built[lang].map((b) => <li>{b}</li>)}</ul>
+              </details>
 
-          <div class="links">
-            {c.links.map((l) => (
-              <a class={`btn sm${l.label !== 'code' ? ' accent' : ''}`} href={l.href} target="_blank" rel="noopener">{linkText[l.label]}</a>
-            ))}
-            {c.requestAccess?.map((r) => {
-              const a = access(r.name, r.repo);
-              return <a class="btn sm" href={a.href} data-contact data-subject={a.subject} data-body={a.body}>🔒 {t.more.requestCode} · {r.name}</a>;
-            })}
-            {c.privateCode && <span class="note mono">🔒 {t.work.privateCode}</span>}
-          </div>
-        </div>
-      </article>
-    ))}
+              <ul class="tags" aria-label="Stack">{c.stack.map((s) => <li>{s}</li>)}</ul>
+
+              <div class="links">
+                {c.links.map((l) => (
+                  <a class="btn sm" href={l.href} target="_blank" rel="noopener">{linkText[l.label].text}<Icon name={linkText[l.label].icon} /></a>
+                ))}
+                {c.requestAccess?.map((r) => {
+                  const a = access(r.name, r.repo);
+                  return <a class="btn sm quiet" href={a.href} data-contact data-subject={a.subject} data-body={a.body}><Icon name="lock" />{accessLabel(r.name, c.name)}</a>;
+                })}
+                {c.privateCode && <span class="note"><Icon name="lock" />{t.work.privateCode}</span>}
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
   </section>
 
   <!-- TAMBIÉN CONSTRUÍ -->
-  <section class="wrap section">
-    <h2 class="section-title small">{t.more.title}</h2>
-    <div class="small-grid">
+  <section class="more">
+    <div class="container">
+      <h2>{t.more.title}</h2>
       {smallProjects.map((p) => (
         <article class="small">
-          <a href={p.image} target="_blank" rel="noopener" class="small-img">
+          <a href={p.image} target="_blank" rel="noopener" class="small-img shot" data-kind="product">
             <img src={p.image} alt={p.imageAlt[lang]} loading="lazy" width="1280" height="720" />
           </a>
-          <h3>{p.name}</h3>
-          <p>{p.text[lang]}</p>
-          <ul class="chips mono">{p.tags.map((tag) => <li>{tag}</li>)}</ul>
-          <div class="links">
-            {p.play && <a class="btn sm accent" href={p.play} target="_blank" rel="noopener">▶ {t.more.play}</a>}
-            {p.site && <a class="btn sm accent" href={p.site} target="_blank" rel="noopener">{t.more.visit} ↗</a>}
-            {p.apk && <a class={`btn sm${p.play ? '' : ' accent'}`} href={p.apk} target="_blank" rel="noopener">{t.more.apk} ↓</a>}
-            {p.privateRepo && (() => {
-              const a = access(p.name, p.privateRepo);
-              return <a class="btn sm" href={a.href} data-contact data-subject={a.subject} data-body={a.body}>🔒 {t.more.requestCode}</a>;
-            })()}
-            {p.repo && <a class="btn sm" href={p.repo} target="_blank" rel="noopener">{t.more.code} ↗</a>}
+          <div class="small-body">
+            <h3>{p.name}</h3>
+            <p>{p.text[lang]}</p>
+            <ul class="tags">{p.tags.map((tag) => <li>{tag}</li>)}</ul>
+            <div class="links">
+              {p.play && <a class="btn sm" href={p.play} target="_blank" rel="noopener">{t.more.play}<Icon name="play" /></a>}
+              {p.site && <a class="btn sm" href={p.site} target="_blank" rel="noopener">{t.more.visit}<Icon name="external" /></a>}
+              {p.apk && <a class="btn sm" href={p.apk} target="_blank" rel="noopener">{t.more.apk}<Icon name="download" /></a>}
+              {p.privateRepo && (() => {
+                const a = access(p.name, p.privateRepo);
+                return <a class="btn sm quiet" href={a.href} data-contact data-subject={a.subject} data-body={a.body}><Icon name="lock" />{t.more.requestCode}</a>;
+              })()}
+              {p.repo && <a class="btn sm" href={p.repo} target="_blank" rel="noopener">{t.more.code}<Icon name="external" /></a>}
+            </div>
           </div>
         </article>
       ))}
@@ -177,11 +221,12 @@ const access = (name: string, repo: string) => {
   </section>
 
   <!-- CÓMO TRABAJO -->
-  <section id="how" class="how">
-    <div class="wrap">
-      <p class="kicker mono">{t.how.kicker}</p>
-      <h2 class="section-title">{t.how.title}</h2>
-      <p class="section-lead">{t.how.text}</p>
+  <section id="how" class="how" aria-label={t.how.kicker}>
+    <div class="container">
+      <div class="how-head">
+        <h2>{t.how.title}</h2>
+        <p class="lead">{t.how.text}</p>
+      </div>
 
       <div class="team" aria-hidden="true">
         <div class="human">
@@ -189,15 +234,14 @@ const access = (name: string, repo: string) => {
           <div><strong>{t.how.me}</strong><small>{t.how.meRole}</small></div>
         </div>
         <div class="wire"></div>
-        <ul class="agents">
-          {agents.map((a, i) => <li class="mono"><span>{String(i + 1).padStart(2, '0')}</span>{a[lang]}</li>)}
-        </ul>
+        <ol class="agents">
+          {agents.map((a) => <li>{a[lang]}</li>)}
+        </ol>
       </div>
 
       <ol class="steps">
-        {t.how.steps.map((s) => (
-          <li>
-            <span class="mono">{s.n}</span>
+        {t.how.steps.map((s, i) => (
+          <li class={i === 2 ? 'is-human' : undefined}>
             <h3>{s.t}</h3>
             <p>{s.d}</p>
           </li>
@@ -208,87 +252,94 @@ const access = (name: string, repo: string) => {
   </section>
 
   <!-- CLIENTES -->
-  <section class="wrap section">
-    <p class="kicker mono">{t.clients.kicker}</p>
-    <h2 class="section-title">{t.clients.title}</h2>
-    <div class="clients">
-      {clientWork.map((c) => (
-        <article>
-          <p class="mono client-name">{c.name}</p>
-          <h3>{c.title[lang]}</h3>
-          <p>{c.text[lang]}</p>
-          <p class="result">{c.result[lang]}</p>
-        </article>
-      ))}
-    </div>
-  </section>
-
-  <!-- TRAYECTORIA -->
-  <section id="experience" class="wrap section">
-    <p class="kicker mono">{t.experience.kicker}</p>
-    <h2 class="section-title">{t.experience.title}</h2>
-    <ol class="timeline">
-      {experience.map((e) => (
-        <li>
-          <span class="when mono">{e.period[lang]}</span>
-          <div>
-            <h3>{e.role[lang]} <span class="org">— {e.org[lang]}</span></h3>
-            <p>{e.text[lang]}</p>
-          </div>
-        </li>
-      ))}
-    </ol>
-
-    <div class="bottom-grid">
-      <div>
-        <h3 class="mono sub">{t.experience.education}</h3>
-        <ul class="plain">{education.map((e) => <li>{e[lang]}</li>)}</ul>
-      </div>
-      <div class="stack">
-        {stack.map((g) => (
-          <div>
-            <h3 class="mono sub">{g.group[lang]}</h3>
-            <ul class="chips mono">{g.items.map((i) => <li>{i}</li>)}</ul>
-          </div>
+  <section class="clients-sec" aria-label={t.clients.kicker}>
+    <div class="container">
+      <h2>{t.clients.title}</h2>
+      <div class="clients">
+        {clientWork.map((c) => (
+          <article>
+            <h3>{c.title[lang]}</h3>
+            <p class="client-name">{c.name}</p>
+            <p>{c.text[lang]}</p>
+            <p class="result">{c.result[lang]}</p>
+          </article>
         ))}
       </div>
     </div>
   </section>
 
+  <!-- TRAYECTORIA -->
+  <section id="experience" class="experience" aria-label={t.experience.kicker}>
+    <div class="container">
+      <h2>{t.experience.title}</h2>
+      <ol class="timeline">
+        {experience.map((e) => (
+          <li>
+            <p class="when figure">{e.period[lang]}</p>
+            <div>
+              <h3>{e.role[lang]}</h3>
+              <p class="org">{e.org[lang]}</p>
+              <p>{e.text[lang]}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <div class="bottom-grid">
+        <div>
+          <h3 class="sub">{t.experience.education}</h3>
+          <ul class="plain">{education.map((e) => <li>{e[lang]}</li>)}</ul>
+        </div>
+        <dl class="stack">
+          {stack.map((g) => (
+            <div>
+              <dt class="sub">{g.group[lang]}</dt>
+              <dd><ul class="tags">{g.items.map((i) => <li>{i}</li>)}</ul></dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </section>
+
   <!-- CONTACTO -->
-  <section id="contact" class="contact">
-    <div class="wrap">
-      <p class="kicker mono">{t.contact.kicker}</p>
-      <h2>{t.contact.title}</h2>
-      <p class="lead">{t.contact.text}</p>
+  <section id="contact" class="contact" aria-label={t.contact.kicker}>
+    <div class="container contact-in">
+      <div>
+        <h2>{t.contact.title}</h2>
+        <p class="lead">{t.contact.text}</p>
+      </div>
+      <div class="contact-act">
       <a class="big-mail" href={`mailto:${profile.email}`} data-contact data-subject={t.contact.subject}>{profile.email}</a>
       <div class="actions">
-        <a class="btn light" href={profile.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
-        <a class="btn light" href={profile.github} target="_blank" rel="noopener">GitHub ↗</a>
-        <a class="btn light" href={profile.cv} download>{t.hero.ctaCv} ↓</a>
+        <a class="btn light" href={profile.linkedin} target="_blank" rel="noopener">LinkedIn<Icon name="external" /></a>
+        <a class="btn light" href={profile.github} target="_blank" rel="noopener">GitHub<Icon name="external" /></a>
+        <a class="btn light" href={profile.cv} download>{t.hero.ctaCv}<Icon name="download" /></a>
+      </div>
       </div>
     </div>
   </section>
 </main>
 
-<dialog id="contact-dialog" class="contact-dialog" data-email={profile.email}>
+<dialog id="contact-dialog" class="contact-dialog" data-email={profile.email} aria-label={t.dialog.kicker}>
   <form method="dialog">
-    <p class="kicker mono">{t.dialog.kicker}</p>
     <h2 id="cd-subject">{t.contact.subject}</h2>
     <p class="cd-text">{t.dialog.text}</p>
     <div class="cd-actions">
-      <a class="btn ink" id="cd-gmail" target="_blank" rel="noopener">{t.dialog.gmail} ↗</a>
+      <a class="btn primary" id="cd-gmail" target="_blank" rel="noopener">{t.dialog.gmail}<Icon name="external" /></a>
       <a class="btn" id="cd-mailto">{t.dialog.app}</a>
       <button type="button" class="btn" id="cd-copy" data-done={t.dialog.copied}>{t.dialog.copy}</button>
     </div>
-    <p class="cd-mail mono">{profile.email}</p>
+    <p class="cd-mail">{profile.email}</p>
     <button class="cd-close" aria-label={t.dialog.close}>×</button>
   </form>
 </dialog>
 
-<footer class="wrap footer mono">
-  <span>© {new Date().getFullYear()} {profile.name}</span>
-  <span>{t.footer}</span>
+<footer class="footer">
+  <div class="container footer-in">
+    <span>© {new Date().getFullYear()} {profile.name}</span>
+    <span>{t.footer}</span>
+  </div>
 </footer>
 
 <script>
